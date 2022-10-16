@@ -12,7 +12,7 @@ export const NavigationBar = () => {
                             <Typography variant={"h5"}>KorepetycjeUWB</Typography>
                         </MenuItem>
                     </Grid>
-                    <Grid xs={8}/>
+                    <Grid item xs={8}/>
                     <Grid item xs={1}>
                         <MenuItem>
                             Logowanie

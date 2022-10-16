@@ -8,23 +8,24 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {useFormik} from "formik";
+import {initialRegisterRequest, RegisterRequest} from "../dtos/requests/Authentication";
 
 
 const theme = createTheme();
 
 export const RegisterForm = () => {
-    
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+
+    const formik = useFormik({
+        initialValues: initialRegisterRequest,
+        onSubmit: (values: RegisterRequest) => {
+            console.log(values)
+        },
+    });
 
     return (
         <ThemeProvider theme={theme}>
+
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -38,69 +39,80 @@ export const RegisterForm = () => {
                     <Typography component="h1" variant="h5">
                         Rejestracja
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
-                                    required
-                                    fullWidth
-                                    id="firstName"
-                                    label="Imię"
-                                    autoFocus
-                                />
+                    <Box sx={{mt: 3}}>
+                        <form onSubmit={formik.handleSubmit}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="firstName"
+                                        name="firstName"
+                                        value={formik.values.firstName}
+                                        onChange={formik.handleChange}
+                                        autoComplete="given-name"
+                                        label="Imię"
+                                        required
+                                        fullWidth
+                                        autoFocus
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="lastName"
+                                        name="lastName"
+                                        value={formik.values.lastName}
+                                        onChange={formik.handleChange}
+                                        required
+                                        fullWidth
+                                        label="Nazwisko"
+                                        autoComplete="family-name"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        id="emailAddress"
+                                        name="emailAddress"
+                                        value={formik.values.emailAddress}
+                                        onChange={formik.handleChange}
+                                        required
+                                        fullWidth
+                                        label="Adres email"
+                                        autoComplete="email"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        id="password"
+                                        name="password"
+                                        value={formik.values.password}
+                                        onChange={formik.handleChange}
+                                        required
+                                        fullWidth
+                                        label="Hasło"
+                                        type="password"
+                                        autoComplete="new-password"
+                                    />
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="lastName"
-                                    label="Nazwisko"
-                                    name="lastName"
-                                    autoComplete="family-name"
-                                />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{mt: 3, mb: 2}}
+                            >
+                                Zarejestruj
+                            </Button>
+                            <Grid container justifyContent="flex-end">
+                                <Grid item>
+                                    <Link href="#" variant="body2">
+                                        Posiadasz już konto? Zaloguj się
+                                    </Link>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Adres email"
-                                    name="email"
-                                    autoComplete="email"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Hasło"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="new-password"
-                                />
-                            </Grid>
-                        </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{mt: 3, mb: 2}}
-                        >
-                            Zarejestruj
-                        </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    Posiadasz już konto? Zaloguj się
-                                </Link>
-                            </Grid>
-                        </Grid>
+                        </form>
                     </Box>
                 </Box>
             </Container>
+
         </ThemeProvider>
     );
 }
