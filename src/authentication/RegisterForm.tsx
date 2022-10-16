@@ -9,7 +9,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useFormik} from "formik";
-import {initialRegisterRequest, RegisterRequest} from "../dtos/requests/Authentication";
+import {
+    initialRegisterRequest,
+    RegisterRequest,
+    registerRequestValidationSchema
+} from "../dtos/requests/Authentication";
 
 
 const theme = createTheme();
@@ -21,7 +25,9 @@ export const RegisterForm = () => {
         onSubmit: (values: RegisterRequest) => {
             console.log(values)
         },
+        validationSchema: registerRequestValidationSchema
     });
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -43,17 +49,23 @@ export const RegisterForm = () => {
                         <form onSubmit={formik.handleSubmit}>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        id="firstName"
-                                        name="firstName"
-                                        value={formik.values.firstName}
-                                        onChange={formik.handleChange}
-                                        autoComplete="given-name"
-                                        label="Imię"
-                                        required
-                                        fullWidth
-                                        autoFocus
-                                    />
+                                    <>
+                                        <TextField
+                                            id="firstName"
+                                            name="firstName"
+                                            value={formik.values.firstName}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            autoComplete="given-name"
+                                            label="Imię"
+                                            required
+                                            fullWidth
+                                            autoFocus
+                                        />
+                                        {formik.touched.firstName && formik.errors.firstName && typeof formik.errors.firstName === "string" && (
+                                            <div style={{color: "red"}}>{formik.errors.firstName}</div>
+                                        )}
+                                    </>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
@@ -61,11 +73,15 @@ export const RegisterForm = () => {
                                         name="lastName"
                                         value={formik.values.lastName}
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         required
                                         fullWidth
                                         label="Nazwisko"
                                         autoComplete="family-name"
                                     />
+                                    {formik.touched.lastName && formik.errors.lastName && typeof formik.errors.lastName === "string" && (
+                                        <div style={{color: "red"}}>{formik.errors.lastName}</div>
+                                    )}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
@@ -73,11 +89,15 @@ export const RegisterForm = () => {
                                         name="emailAddress"
                                         value={formik.values.emailAddress}
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         required
                                         fullWidth
                                         label="Adres email"
                                         autoComplete="email"
                                     />
+                                    {formik.touched.emailAddress && formik.errors.emailAddress && typeof formik.errors.emailAddress === "string" && (
+                                        <div style={{color: "red"}}>{formik.errors.emailAddress}</div>
+                                    )}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
@@ -85,12 +105,16 @@ export const RegisterForm = () => {
                                         name="password"
                                         value={formik.values.password}
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         required
                                         fullWidth
                                         label="Hasło"
                                         type="password"
                                         autoComplete="new-password"
                                     />
+                                    {formik.touched.password && formik.errors.password && typeof formik.errors.password === "string" && (
+                                        <div style={{color: "red"}}>{formik.errors.password}</div>
+                                    )}
                                 </Grid>
                             </Grid>
                             <Button
