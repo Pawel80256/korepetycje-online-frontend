@@ -32,7 +32,9 @@ export const RegisterForm = () => {
     return (
         <ThemeProvider theme={theme}>
 
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" sx={{
+                marginTop:'10%'
+            }}>
                 <CssBaseline/>
                 <Box
                     sx={{
@@ -58,7 +60,7 @@ export const RegisterForm = () => {
                                             onBlur={formik.handleBlur}
                                             autoComplete="given-name"
                                             label="Imię"
-                                            required
+                                            // required
                                             fullWidth
                                             autoFocus
                                         />
@@ -74,7 +76,7 @@ export const RegisterForm = () => {
                                         value={formik.values.lastName}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        required
+                                        // required
                                         fullWidth
                                         label="Nazwisko"
                                         autoComplete="family-name"
@@ -90,7 +92,7 @@ export const RegisterForm = () => {
                                         value={formik.values.emailAddress}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        required
+                                        // required
                                         fullWidth
                                         label="Adres email"
                                         autoComplete="email"
@@ -106,7 +108,7 @@ export const RegisterForm = () => {
                                         value={formik.values.password}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        required
+                                        // required
                                         fullWidth
                                         label="Hasło"
                                         type="password"
@@ -122,6 +124,7 @@ export const RegisterForm = () => {
                                 fullWidth
                                 variant="contained"
                                 sx={{mt: 3, mb: 2}}
+                                disabled={!registerRequestValidationSchema.isValidSync(formik.values)}
                             >
                                 Zarejestruj
                             </Button>
