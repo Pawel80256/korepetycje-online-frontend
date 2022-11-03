@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import {Avatar} from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const Img = styled('img')({
     margin: 'auto',
@@ -26,12 +27,13 @@ export const TeacherListElement = () => {
             }}
         >
             <Grid container spacing={2}>
+                <CssBaseline/>
                 <Grid item>
                         <Avatar alt={"avatar"} src={"https://i.kym-cdn.com/entries/icons/original/000/031/015/cover5.jpg"}
                                 sx={{ width: 100, height: 100 }}/>
                 </Grid>
                 <Grid item xs={12} sm container>
-                    <Grid item xs container direction="column" spacing={2}>
+                    <Grid item xs container direction="column" spacing={6}>
                         <Grid item xs>
                             <Typography gutterBottom variant="subtitle1" component="div">
                                 Paweł Nowacki
@@ -39,8 +41,10 @@ export const TeacherListElement = () => {
                             <Typography variant="body2" gutterBottom>
                                 Ocena ogólna : (gwiazdki)
                             </Typography>
+                        </Grid>
+                        <Grid item>
                             <Typography variant="body2" color="text.secondary">
-                                Matematyka
+                                Matematyka, Informatyka, j.angielski
                             </Typography>
                         </Grid>
                         <Grid item>

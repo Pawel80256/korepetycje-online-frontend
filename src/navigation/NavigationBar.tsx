@@ -7,7 +7,7 @@ import {AppRoutes} from "./Routes";
 export const NavigationBar = () => {
     const navigate = useNavigate()
     return (
-        <AppBar position={"sticky"}>
+        <AppBar position="static">
             <Toolbar>
                 <Grid container alignContent={"center"}>
                     <Grid item xs={2}>

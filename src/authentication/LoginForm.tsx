@@ -40,7 +40,7 @@ export const LoginForm = () => {
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs" sx={{
-                marginTop:'10%'
+                marginTop:'5%'
             }}>
                 <CssBaseline />
                 <Box

@@ -1,22 +1,24 @@
 import React from 'react';
 import {NavigationBar} from "./navigation/NavigationBar";
 import {RegisterForm} from "./authentication/RegisterForm";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {AppRoutes} from "./navigation/Routes";
 import {LoginForm} from "./authentication/LoginForm";
-import {TeacherListElement} from "./teacherComponents/TeacherListElement";
+import {CssBaseline} from "@mui/material";
 
 
 function App() {
     return (
         <>
             <NavigationBar/>
-            <TeacherListElement/>
+            <CssBaseline/>
+            {/*<SearchTeacherForm/>*/}
+            {/*<TeacherListElement/>*/}
 
-                <Routes>
-                    <Route path={AppRoutes.REGISTER} element={<RegisterForm/>}/>
-                    <Route path={AppRoutes.LOGIN} element={<LoginForm/>}/>
-                </Routes>
+            <Routes>
+                <Route path={AppRoutes.REGISTER} element={<RegisterForm/>}/>
+                <Route path={AppRoutes.LOGIN} element={<LoginForm/>}/>
+            </Routes>
         </>
     );
 }
