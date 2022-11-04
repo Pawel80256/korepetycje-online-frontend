@@ -1,3 +1,8 @@
 export const SearchTeacherForm = () => {
-    return <h1>siema</h1>
+    // const dispatch = useAppDispatch()
+    // useEffect(() => {
+    //     console.log('siema')
+    //     dispatch(getAllTeachers())
+    // }, [])
+    return <h1>searchTeacherForm</h1>
 }

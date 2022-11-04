@@ -13,9 +13,10 @@ function App() {
             <NavigationBar/>
             <CssBaseline/>
             {/*<SearchTeacherForm/>*/}
-            {/*<TeacherListElement/>*/}
+            {/*<TeacherListElement teacher={{} as TeacherDto}/>*/}
 
             <Routes>
+                <Route path={AppRoutes.HOME} element={<></>}/>
                 <Route path={AppRoutes.REGISTER} element={<RegisterForm/>}/>
                 <Route path={AppRoutes.LOGIN} element={<LoginForm/>}/>
             </Routes>
