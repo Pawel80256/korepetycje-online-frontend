@@ -1,10 +1,12 @@
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import teacherReducer from "./slices/TeacherSlice";
+import authReducer from "./slices/AuthSlice";
 
 
 export const store = configureStore({
     reducer: {
-        teachers: teacherReducer
+        teachers: teacherReducer,
+        auth: authReducer
     },
 });
 

@@ -12,7 +12,7 @@ interface TeacherListElementProps {
 
 export const TeacherListElement: React.FC<TeacherListElementProps> = (props: TeacherListElementProps) => {
     const {teacher} = props
-    // const subjectNames = teacher.subjects.map(subject => subject.subjectName)
+    const subjectNames = teacher.subjects.map(subject => subject.subjectName)
     return (
         <Paper
             sx={{
@@ -42,8 +42,8 @@ export const TeacherListElement: React.FC<TeacherListElementProps> = (props: Tea
                         </Grid>
                         <Grid item>
                             <Typography variant="body2" color="text.secondary">
-                                {/*{subjectNames.join(', ')}*/}
-                                Matematyka, Informatyka, j.angielski
+                                {subjectNames.join(', ')}
+                                {/*Matematyka, Informatyka, j.angielski*/}
                             </Typography>
                         </Grid>
                         <Grid item>

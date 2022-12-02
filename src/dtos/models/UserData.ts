@@ -3,3 +3,9 @@ export interface UserDataDto {
     lastName: string
     emailAddress: string
 }
+
+export const initialUserDataDto = {
+    firstName: '',
+    lastName: '',
+    emailAddress: ''
+}

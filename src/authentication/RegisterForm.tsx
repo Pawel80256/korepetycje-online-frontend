@@ -14,6 +14,8 @@ import {
     RegisterRequest,
     registerRequestValidationSchema
 } from "../dtos/requests/Authentication";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {UserClass} from "../constants/UserClass";
 
 
 const theme = createTheme();
@@ -21,8 +23,8 @@ const theme = createTheme();
 export const RegisterForm = () => {
 
     const formik = useFormik({
-        initialValues: initialRegisterRequest,
-        onSubmit: (values: RegisterRequest) => {
+        initialValues: {registerRequest: initialRegisterRequest, userClass: UserClass.client},
+        onSubmit: (values: { registerRequest: RegisterRequest, userClass: UserClass }) => {
             console.log(values)
         },
         validationSchema: registerRequestValidationSchema
@@ -33,7 +35,7 @@ export const RegisterForm = () => {
         <ThemeProvider theme={theme}>
 
             <Container component="main" maxWidth="xs" sx={{
-                marginTop:'5%'
+                marginTop: '5%'
             }}>
                 <CssBaseline/>
                 <Box
@@ -50,12 +52,32 @@ export const RegisterForm = () => {
                     <Box sx={{mt: 3}}>
                         <form onSubmit={formik.handleSubmit}>
                             <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <FormControl fullWidth>
+                                        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                                        <Select
+                                            name="userClass"
+                                            id="userClass"
+                                            labelId="demo-simple-select-label"
+                                            // id="demo-simple-select"
+                                            value={formik.values.userClass}
+                                            // defaultValue={UserClass.client}
+                                            label="Age"
+                                            // onChange={(e) => formik.setFieldValue("userClass", e.target.value)}
+                                            onChange={formik.handleChange}
+                                        >
+                                            <MenuItem value={UserClass.client}>Klient</MenuItem>
+                                            <MenuItem value={UserClass.teacher}>Nauczyciel</MenuItem>
+                                            {/*<MenuItem value={30}>Thirty</MenuItem>*/}
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <>
                                         <TextField
                                             id="firstName"
                                             name="firstName"
-                                            value={formik.values.firstName}
+                                            value={formik.values.registerRequest.firstName}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             autoComplete="given-name"
@@ -64,8 +86,8 @@ export const RegisterForm = () => {
                                             fullWidth
                                             autoFocus
                                         />
-                                        {formik.touched.firstName && formik.errors.firstName && typeof formik.errors.firstName === "string" && (
-                                            <div style={{color: "red"}}>{formik.errors.firstName}</div>
+                                        {formik.touched.registerRequest?.firstName && formik.errors.registerRequest?.firstName && typeof formik.errors.registerRequest?.firstName === "string" && (
+                                            <div style={{color: "red"}}>{formik.errors.registerRequest?.firstName}</div>
                                         )}
                                     </>
                                 </Grid>
@@ -73,7 +95,7 @@ export const RegisterForm = () => {
                                     <TextField
                                         id="lastName"
                                         name="lastName"
-                                        value={formik.values.lastName}
+                                        value={formik.values.registerRequest.lastName}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         // required
@@ -81,15 +103,15 @@ export const RegisterForm = () => {
                                         label="Nazwisko"
                                         autoComplete="family-name"
                                     />
-                                    {formik.touched.lastName && formik.errors.lastName && typeof formik.errors.lastName === "string" && (
-                                        <div style={{color: "red"}}>{formik.errors.lastName}</div>
-                                    )}
+                                    {/*{formik.touched.lastName && formik.errors.lastName && typeof formik.errors.lastName === "string" && (*/}
+                                    {/*    <div style={{color: "red"}}>{formik.errors.lastName}</div>*/}
+                                    {/*)}*/}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
                                         id="emailAddress"
                                         name="emailAddress"
-                                        value={formik.values.emailAddress}
+                                        value={formik.values.registerRequest.emailAddress}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         // required
@@ -97,15 +119,15 @@ export const RegisterForm = () => {
                                         label="Adres email"
                                         autoComplete="email"
                                     />
-                                    {formik.touched.emailAddress && formik.errors.emailAddress && typeof formik.errors.emailAddress === "string" && (
-                                        <div style={{color: "red"}}>{formik.errors.emailAddress}</div>
-                                    )}
+                                    {/*{formik.touched.emailAddress && formik.errors.emailAddress && typeof formik.errors.emailAddress === "string" && (*/}
+                                    {/*    <div style={{color: "red"}}>{formik.errors.emailAddress}</div>*/}
+                                    {/*)}*/}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
                                         id="password"
                                         name="password"
-                                        value={formik.values.password}
+                                        value={formik.values.registerRequest.password}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         // required
@@ -114,9 +136,9 @@ export const RegisterForm = () => {
                                         type="password"
                                         autoComplete="new-password"
                                     />
-                                    {formik.touched.password && formik.errors.password && typeof formik.errors.password === "string" && (
-                                        <div style={{color: "red"}}>{formik.errors.password}</div>
-                                    )}
+                                    {/*{formik.touched.password && formik.errors.password && typeof formik.errors.password === "string" && (*/}
+                                    {/*    <div style={{color: "red"}}>{formik.errors.password}</div>*/}
+                                    {/*)}*/}
                                 </Grid>
                             </Grid>
                             <Button
