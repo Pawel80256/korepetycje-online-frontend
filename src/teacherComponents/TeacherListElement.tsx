@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import {Avatar} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import {TeacherDto} from "../dtos/models/Teacher";
+import {getAverageRating} from "../app/utils/utils";
 
 interface TeacherListElementProps {
     teacher: TeacherDto
@@ -18,10 +19,11 @@ export const TeacherListElement: React.FC<TeacherListElementProps> = (props: Tea
             sx={{
                 p: 2,
                 margin: 'auto',
+                marginTop: '5%',
                 maxWidth: 500,
                 flexGrow: 1,
-                backgroundColor: (theme) =>
-                    theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+                backgroundColor: () =>
+                    '#ECF8FF'
             }}
         >
             <Grid container spacing={2}>
@@ -37,7 +39,8 @@ export const TeacherListElement: React.FC<TeacherListElementProps> = (props: Tea
                                 {`${teacher.userData.firstName} ${teacher.userData.lastName}`}
                             </Typography>
                             <Typography variant="body2" gutterBottom>
-                                Ocena ogólna : (dorobic utils obliczajacy srednia)
+                                Ocena ogólna
+                                : {teacher.opinions.length === 0 ? 'Brak ocen' : getAverageRating(teacher.opinions)}
                             </Typography>
                         </Grid>
                         <Grid item>
