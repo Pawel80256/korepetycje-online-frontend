@@ -4,6 +4,7 @@ import {LoginRequest, RegisterRequest} from "../../dtos/requests/Authentication"
 import axios from "axios";
 import {parseJwt} from "../utils/utils";
 
+
 export interface authState {
     userData: any, //todo: type
     token: string
@@ -27,15 +28,27 @@ export const registerTeacher = createAsyncThunk(
     }
 )
 
+export const getUserData = createAsyncThunk(
+    'userdata',
+    async (id: string, {rejectWithValue}) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/api/userData/${id}`)
+            console.log(response.data)
+        } catch (error) {
+            rejectWithValue(error)
+        }
+    }
+)
 export const login = createAsyncThunk(
     "auth/login",
     async (request: LoginRequest, {rejectWithValue}) => {
+        // const dispatch = useAppDispatch();
         try {
             const jwt = await axios.post('http://localhost:8080/api/authenticate', request);
-            console.log(jwt)
             const data = parseJwt(jwt.data)
-            console.log(data)
-            // return data;
+            localStorage.setItem("jwt", JSON.stringify(jwt.data));
+            localStorage.setItem("userDataId", data.sub)
+            return jwt;
         } catch (error) {
             return rejectWithValue(error)
         }
@@ -52,7 +65,7 @@ const AuthSlice = createSlice({
     reducers: {},
     extraReducers: (builder => {
         builder.addCase(login.fulfilled, (state, action) => {
-            console.log(action.payload);
+            state.token = action.payload.data
         })
     })
 })

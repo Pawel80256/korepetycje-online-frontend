@@ -25,7 +25,8 @@ const login = (emailAddress: string, password: string) => {
 };
 
 const logout = () => {
-    // localStorage.removeItem("user");
+    localStorage.setItem("jwt", '');
+    localStorage.setItem("userDataId", '');
     console.log("logout")
 };
 
