@@ -5,6 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import {AppRoutes} from "./navigation/Routes";
 import {LoginForm} from "./authentication/LoginForm";
 import {CssBaseline} from "@mui/material";
+import {TeacherList} from "./teacherComponents/TeacherList";
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
             <CssBaseline/>
             {/*<SearchTeacherForm/>*/}
             {/*<TeacherListElement teacher={{} as TeacherDto}/>*/}
-
+            <TeacherList teacherss={[]}></TeacherList>
             <Routes>
                 <Route path={AppRoutes.HOME} element={<></>}/>
                 <Route path={AppRoutes.REGISTER} element={<RegisterForm/>}/>
