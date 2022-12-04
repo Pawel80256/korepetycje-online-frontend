@@ -8,3 +8,15 @@ export const getAllCities = async () => {
         console.log(error)
     }
 }
+
+export const getTeachersBySubjectAndCity = async (subject: string, city: string) => {
+    try {
+        const response = await axios.get(
+            'http://localhost:8080/api/teachersBySubjectAndCity',
+            {params: {subject, city}}
+        )
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
