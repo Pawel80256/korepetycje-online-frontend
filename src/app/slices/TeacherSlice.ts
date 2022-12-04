@@ -24,6 +24,16 @@ export const getAllTeachers = createAsyncThunk(
     }
 )
 
+// export const getAllSubjects = createAsyncThunk(
+//     'subjects',
+//     async () => {
+//         try {
+//             const response = await axios.get('http://localhost:8080/api/subjects');
+//             console.log(response.data)
+//         }
+//     }
+// )
+
 const TeacherSlice = createSlice({
     name: 'teachers',
     initialState,

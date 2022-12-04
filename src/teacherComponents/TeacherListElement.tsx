@@ -19,7 +19,7 @@ export const TeacherListElement: React.FC<TeacherListElementProps> = (props: Tea
             sx={{
                 p: 2,
                 margin: 'auto',
-                marginTop: '5%',
+                marginTop: '2%',
                 maxWidth: 500,
                 flexGrow: 1,
                 backgroundColor: () =>
@@ -46,12 +46,11 @@ export const TeacherListElement: React.FC<TeacherListElementProps> = (props: Tea
                         <Grid item>
                             <Typography variant="body2" color="text.secondary">
                                 {subjectNames.join(', ')}
-                                {/*Matematyka, Informatyka, j.angielski*/}
                             </Typography>
                         </Grid>
                         <Grid item>
                             <Typography sx={{cursor: 'pointer'}} variant="body2">
-                                Zambrów ul. Bema 4/26
+                                {teacher.city}
                             </Typography>
                         </Grid>
                     </Grid>

@@ -7,4 +7,5 @@ export interface TeacherDto {
     userData: UserDataDto
     subjects: SubjectDto[]
     opinions: OpinionDto[]
+    city: string
 }
