@@ -5,7 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import {AppRoutes} from "./navigation/Routes";
 import {LoginForm} from "./authentication/LoginForm";
 import {CssBaseline} from "@mui/material";
-import {SearchTeacherForm} from "./otherComponents/SearchTeacherForm";
+import {SearchTeacherPage} from "./teacherComponents/searchTeacherPage/SearchTeacherPage";
 
 
 function App() {
@@ -13,7 +13,8 @@ function App() {
         <>
             <NavigationBar/>
             <CssBaseline/>
-            <SearchTeacherForm/>
+            <SearchTeacherPage></SearchTeacherPage>
+            {/*<SearchTeacherForm/>*/}
             {/*<TeacherListElement teacher={{} as TeacherDto}/>*/}
             {/*<TeacherList teacherss={[]}></TeacherList>*/}
             <Routes>
