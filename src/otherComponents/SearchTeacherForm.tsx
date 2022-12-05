@@ -3,13 +3,14 @@ import {useFormik} from "formik";
 import {initialSearchTeacherRequest, searchTeacherRequest, searchTeacherValidationSchema} from "../app/formikSchemas";
 import {useEffect, useState} from "react";
 import {getAllSubjects} from "../app/services/SubjectService";
-import {getAllCities, getTeachersBySubjectAndCity} from "../app/services/TeacherService";
-import {TeacherDto} from "../dtos/models/Teacher";
+import {getAllCities} from "../app/services/TeacherService";
+import {useAppDispatch} from "../app/hooks";
+import {getAllTeachersBySubjectAndCity} from "../app/slices/TeacherSlice";
 
 export const SearchTeacherForm = () => {
     const [subjects, setSubjects] = useState<string[]>([])
     const [cities, setCities] = useState<string[]>([])
-    const [foundTeachers, setFoundTeachers] = useState<TeacherDto[]>([])
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         getAllSubjects().then(response => {
@@ -23,9 +24,7 @@ export const SearchTeacherForm = () => {
     const formik = useFormik({
         initialValues: initialSearchTeacherRequest,
         onSubmit: (values: searchTeacherRequest) => {
-            getTeachersBySubjectAndCity(values.subject, values.city).then(response => {
-                console.log(response)
-            })
+            dispatch(getAllTeachersBySubjectAndCity({subject: values.subject, city: values.city}))
         },
         validationSchema: searchTeacherValidationSchema
     });
