@@ -6,12 +6,14 @@ import {Avatar} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import {TeacherDto} from "../dtos/models/Teacher";
 import {getAverageRating} from "../app/utils/utils";
+import {useNavigate} from "react-router-dom";
 
 interface TeacherListElementProps {
     teacher: TeacherDto
 }
 
 export const TeacherListElement: React.FC<TeacherListElementProps> = (props: TeacherListElementProps) => {
+    const navigate = useNavigate();
     const {teacher} = props
     const subjectNames = teacher.subjects.map(subject => subject.subjectName)
     return (
@@ -22,11 +24,15 @@ export const TeacherListElement: React.FC<TeacherListElementProps> = (props: Tea
                 marginTop: '2%',
                 maxWidth: 500,
                 flexGrow: 1,
+                "&:hover":{
+                    cursor:"pointer",
+                    backgroundColor: "#C0E6FC"
+                },
                 backgroundColor: () =>
                     '#ECF8FF'
             }}
         >
-            <Grid container spacing={2}>
+            <Grid container spacing={2} onClick={()=>navigate(`/teacher/${teacher.id}`)}>
                 <CssBaseline/>
                 <Grid item>
                     <Avatar alt={"avatar"} src={"https://i.kym-cdn.com/entries/icons/original/000/031/015/cover5.jpg"}

@@ -15,7 +15,7 @@ const initialState: authState = {
     token: ''
 }
 
-const user = JSON.parse(localStorage.getItem("user")!);
+// const user = JSON.parse(localStorage.getItem("user")!);
 
 export const registerTeacher = createAsyncThunk(
     'teacher/register',

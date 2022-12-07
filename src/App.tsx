@@ -6,6 +6,7 @@ import {AppRoutes} from "./navigation/Routes";
 import {LoginForm} from "./authentication/LoginForm";
 import {CssBaseline} from "@mui/material";
 import {SearchTeacherPage} from "./teacherComponents/searchTeacherPage/SearchTeacherPage";
+import {TeacherPublicProfile} from "./teacherComponents/teacherPublicProfile/TeacherPublicProfile";
 
 
 function App() {
@@ -13,14 +14,12 @@ function App() {
         <>
             <NavigationBar/>
             <CssBaseline/>
-            <SearchTeacherPage></SearchTeacherPage>
-            {/*<SearchTeacherForm/>*/}
-            {/*<TeacherListElement teacher={{} as TeacherDto}/>*/}
-            {/*<TeacherList teacherss={[]}></TeacherList>*/}
             <Routes>
                 <Route path={AppRoutes.HOME} element={<></>}/>
                 <Route path={AppRoutes.REGISTER} element={<RegisterForm/>}/>
                 <Route path={AppRoutes.LOGIN} element={<LoginForm/>}/>
+                <Route path={AppRoutes.SEARCH} element={<SearchTeacherPage/>}/>
+                <Route path={AppRoutes.TEACHER_PUBLIC_PROFILE} element={<TeacherPublicProfile/>}/>
             </Routes>
         </>
     );
