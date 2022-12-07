@@ -1,5 +1,14 @@
 import axios from "axios";
 
+export const getTeacherById = async (teacherId:string) =>{
+    try {
+        const response = await axios.get(`http://localhost:8080/api/teacher/${teacherId}`);
+        return (response.data)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const getAllCities = async () => {
     try {
         const response = await axios.get('http://localhost:8080/api/teacher/cities');
