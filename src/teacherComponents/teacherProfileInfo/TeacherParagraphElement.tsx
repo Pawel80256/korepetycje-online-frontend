@@ -24,7 +24,6 @@ export const TeacherParagraphElement: React.FC<TeacherParagraphElementProps> = (
                 </Typography>
             </Grid>
 
-
         </Grid>
     )
 }

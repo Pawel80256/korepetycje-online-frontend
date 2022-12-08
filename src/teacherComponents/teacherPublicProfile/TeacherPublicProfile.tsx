@@ -7,6 +7,7 @@ import {getTeacherById} from "../../app/services/TeacherService";
 import {initialTeacherDto, TeacherDto} from "../../dtos/models/Teacher";
 import {getAverageRating} from "../../app/utils/utils";
 import {TeacherParagraphElement} from "../teacherProfileInfo/TeacherParagraphElement";
+import {TeacherParagraphList} from "../teacherProfileInfo/TeacherParagraphList";
 
 export const TeacherPublicProfile = () => {
     const params = useParams();
@@ -79,7 +80,7 @@ export const TeacherPublicProfile = () => {
             </Grid>
 
             <Grid item>
-                <TeacherParagraphElement paragraph={teacher.profileInfo[0]}></TeacherParagraphElement>
+                <TeacherParagraphList paragraphs={teacher.profileInfo}/>
             </Grid>
         </Grid>
     )
