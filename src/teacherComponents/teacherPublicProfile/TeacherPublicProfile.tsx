@@ -6,8 +6,8 @@ import {useEffect, useState} from "react";
 import {getTeacherById} from "../../app/services/TeacherService";
 import {initialTeacherDto, TeacherDto} from "../../dtos/models/Teacher";
 import {getAverageRating} from "../../app/utils/utils";
-import {TeacherParagraphElement} from "../teacherProfileInfo/TeacherParagraphElement";
 import {TeacherParagraphList} from "../teacherProfileInfo/TeacherParagraphList";
+import StarRatings from 'react-star-ratings';
 
 export const TeacherPublicProfile = () => {
     const params = useParams();
@@ -66,7 +66,8 @@ export const TeacherPublicProfile = () => {
                                 <>
                                     {console.log(teacher)}
                                     <Typography>
-                                        {`Ocena: ${teacher && teacher.opinions.length === 0 ? "Brak" : getAverageRating(teacher?.opinions)}`}
+                                        Ocena:
+                                        <StarRatings rating={3.5} numberOfStars={5} starRatedColor="#3990E8" starDimension={"15px"} starSpacing={"1px"}/>
                                     </Typography>
                                     <Typography>
                                         {`Opinie: ${teacher?.opinions.length}`}
