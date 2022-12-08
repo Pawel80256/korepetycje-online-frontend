@@ -15,12 +15,10 @@ export function parseJwt(token: any) {
     return JSON.parse(jsonPayload);
 }
 
-export const getAverageRating = (opinions: OpinionDto[]) => {
-    if (opinions.length === 0) {
-        return 0
+export const getAverageRating = (opinions: OpinionDto[] | undefined) => {
+    if (opinions === undefined) {
+        return 0;
     }
-    const numericValues: number[] = opinions.map(opinion => opinion.numericValue)
-    let sum = 0
-    numericValues.forEach(nv => sum += nv)
-    return sum / numericValues.length
-}
+    const sum = opinions.map(opinion => opinion.numericValue).reduce((total, nv) => total + nv, 0);
+    return sum / opinions.length;
+};

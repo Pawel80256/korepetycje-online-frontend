@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const getTeacherById = async (teacherId:string) =>{
+export const getTeacherById = async (teacherId: string) => {
     try {
-        const response = await axios.get(`http://localhost:8080/api/teacher/${teacherId}`);
-        return (response.data)
+        const response = await axios.get(`http://localhost:8080/api/teacher/${teacherId}`)
+        return response.data
     } catch (error) {
         console.log(error)
     }
