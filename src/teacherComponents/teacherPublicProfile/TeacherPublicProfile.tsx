@@ -8,6 +8,7 @@ import {initialTeacherDto, TeacherDto} from "../../dtos/models/Teacher";
 import {getAverageRating} from "../../app/utils/utils";
 import {TeacherParagraphList} from "../teacherProfileInfo/TeacherParagraphList";
 import StarRatings from 'react-star-ratings';
+import {MyCalendar} from "../calendar/MyCalendar";
 
 export const TeacherPublicProfile = () => {
     const params = useParams();
@@ -82,6 +83,16 @@ export const TeacherPublicProfile = () => {
 
             <Grid item>
                 <TeacherParagraphList paragraphs={teacher.profileInfo}/>
+            </Grid>
+
+            <Grid item style={{margin: "auto", width: "60%", padding: "5px", marginBottom:"5%"}}>
+                <MyCalendar dateTimes={[
+                    new Date(2022, 11, 1),
+                    new Date(2022, 11, 10),
+                    new Date(2022, 11, 15),
+                    new Date(2022, 11, 20),
+                    new Date(2022, 11, 31),
+                ]}/>
             </Grid>
         </Grid>
     )
