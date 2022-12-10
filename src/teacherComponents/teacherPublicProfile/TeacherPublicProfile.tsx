@@ -10,6 +10,7 @@ import {TeacherParagraphList} from "../teacherProfileInfo/TeacherParagraphList";
 import StarRatings from 'react-star-ratings';
 import {MyCalendar} from "../calendar/MyCalendar";
 import {OpinionList} from "../opinions/OpinionList";
+import OpinionNumericValueList from "../opinions/OpinionNumericValueList";
 
 export const TeacherPublicProfile = () => {
     const params = useParams();
@@ -97,6 +98,13 @@ export const TeacherPublicProfile = () => {
                         new Date(2022, 11, 20),
                         new Date(2022, 11, 31),
                     ]}/>
+                </Paper>
+            </Grid>
+
+            <Grid item sx={{display: "flex"}}>
+                <Paper elevation={2}
+                       style={{margin: "auto", width: "60%", padding: "5px"}}>
+                    <OpinionNumericValueList opinions={teacher.opinions}/>
                 </Paper>
             </Grid>
 
