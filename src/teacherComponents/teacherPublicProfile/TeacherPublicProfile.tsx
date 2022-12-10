@@ -91,13 +91,7 @@ export const TeacherPublicProfile = () => {
 
             <Grid item sx={{display: "flex"}}>
                 <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
-                    <MyCalendar dateTimes={[
-                        new Date(2022, 11, 1),
-                        new Date(2022, 11, 10),
-                        new Date(2022, 11, 15),
-                        new Date(2022, 11, 20),
-                        new Date(2022, 11, 31),
-                    ]}/>
+                    <MyCalendar dateTimes={teacher.appointments.map(appointment => new Date(appointment.date))}/>
                 </Paper>
             </Grid>
 
