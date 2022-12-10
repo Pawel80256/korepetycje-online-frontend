@@ -16,7 +16,7 @@ export const OpinionNumericValueList: React.FC<Props> = ({opinions}) => {
     const opinionPercents = opinionCounts.map(count => (count / opinions.length) * 100);
 
     return (
-        <Grid container style={{padding: "15px"}}>
+        <Grid container>
             <Grid container item>
                 <Typography fontSize={"30px"}> {`${opinions.length} opinie: `}&nbsp; </Typography>
                 <Grid item style={{marginTop: "5px"}}>

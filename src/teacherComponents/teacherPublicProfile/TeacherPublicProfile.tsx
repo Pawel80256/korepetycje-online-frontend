@@ -1,4 +1,4 @@
-import {Avatar, Button, Grid, Paper} from "@mui/material";
+import {Avatar, Button, Divider, Grid, Paper} from "@mui/material";
 import {useParams} from "react-router-dom";
 import * as React from "react";
 import {useEffect, useState} from "react";
@@ -101,20 +101,15 @@ export const TeacherPublicProfile = () => {
                 </Paper>
             </Grid>
 
-            <Grid item sx={{display: "flex"}}>
+            <Grid item>
                 <Paper elevation={2}
-                       style={{margin: "auto", width: "60%", padding: "5px"}}>
+                       style={{margin: "auto", width: "60%", padding: "15px"}}>
                     <OpinionNumericValueList opinions={teacher.opinions}/>
-                </Paper>
-            </Grid>
-
-            {teacher.opinions.length > 0 &&
-            <Grid item sx={{display: "flex"}}>
-                <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
+                    <Divider style={{marginTop: "2%", marginBottom: "2%"}}/>
                     <OpinionList opinions={teacher.opinions}/>
                 </Paper>
             </Grid>
-            }
+
 
         </Grid>
     )
