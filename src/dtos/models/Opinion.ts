@@ -4,14 +4,14 @@ export interface OpinionDto {
     id: string,
     textValue: string,
     numericValue: number,
-    creaatedAt: Date,
+    createdAt: Date,
     client: ClientDto
 }
 
-export const initialOpinionDto:OpinionDto = {
+export const initialOpinionDto: OpinionDto = {
     id: '',
     textValue: '',
-    numericValue:0,
-    creaatedAt: new Date(),
+    numericValue: 0,
+    createdAt: new Date(),
     client: initialClientDto
 }

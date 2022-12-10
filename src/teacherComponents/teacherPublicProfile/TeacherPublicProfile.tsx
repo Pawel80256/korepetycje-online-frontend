@@ -9,6 +9,7 @@ import {getAverageRating} from "../../app/utils/utils";
 import {TeacherParagraphList} from "../teacherProfileInfo/TeacherParagraphList";
 import StarRatings from 'react-star-ratings';
 import {MyCalendar} from "../calendar/MyCalendar";
+import {OpinionElement} from "../opinions/OpinionElement";
 
 export const TeacherPublicProfile = () => {
     const params = useParams();
@@ -23,7 +24,7 @@ export const TeacherPublicProfile = () => {
 
 
     return (
-        <Grid container sx={{display: "flex", marginTop: "2%"}} direction={"column"} spacing={2}>
+        <Grid container sx={{display: "flex", marginTop: "2%", marginBottom: "2%"}} direction={"column"} spacing={2}>
             <Grid item container sx={{display: "flex"}} direction={"row"}>
 
                 <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
@@ -87,15 +88,26 @@ export const TeacherPublicProfile = () => {
                 <TeacherParagraphList paragraphs={teacher.profileInfo}/>
             </Grid>
 
-            <Grid item style={{margin: "auto", width: "60%", padding: "5px", marginBottom: "5%"}}>
-                <MyCalendar dateTimes={[
-                    new Date(2022, 11, 1),
-                    new Date(2022, 11, 10),
-                    new Date(2022, 11, 15),
-                    new Date(2022, 11, 20),
-                    new Date(2022, 11, 31),
-                ]}/>
+            <Grid item sx={{display: "flex"}}>
+                <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
+                    <MyCalendar dateTimes={[
+                        new Date(2022, 11, 1),
+                        new Date(2022, 11, 10),
+                        new Date(2022, 11, 15),
+                        new Date(2022, 11, 20),
+                        new Date(2022, 11, 31),
+                    ]}/>
+                </Paper>
             </Grid>
+
+            {teacher.opinions.length > 0 &&
+            <Grid item sx={{display: "flex"}}>
+                <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
+                    <OpinionElement opinion={teacher.opinions[0]}/>
+                </Paper>
+            </Grid>
+            }
+
         </Grid>
     )
 }
