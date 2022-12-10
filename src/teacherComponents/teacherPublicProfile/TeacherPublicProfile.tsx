@@ -1,8 +1,8 @@
 import {Avatar, Button, Grid, Paper} from "@mui/material";
 import {useParams} from "react-router-dom";
 import * as React from "react";
-import Typography from "@mui/material/Typography";
 import {useEffect, useState} from "react";
+import Typography from "@mui/material/Typography";
 import {getTeacherById} from "../../app/services/TeacherService";
 import {initialTeacherDto, TeacherDto} from "../../dtos/models/Teacher";
 import {getAverageRating} from "../../app/utils/utils";
@@ -68,7 +68,9 @@ export const TeacherPublicProfile = () => {
                                     {console.log(teacher)}
                                     <Typography>
                                         Ocena:
-                                        <StarRatings rating={3.5} numberOfStars={5} starRatedColor="#3990E8" starDimension={"15px"} starSpacing={"1px"}/>
+                                        <StarRatings rating={getAverageRating(teacher.opinions)} numberOfStars={5}
+                                                     starRatedColor="#3990E8" starDimension={"15px"}
+                                                     starSpacing={"1px"}/>
                                     </Typography>
                                     <Typography>
                                         {`Opinie: ${teacher?.opinions.length}`}
@@ -85,7 +87,7 @@ export const TeacherPublicProfile = () => {
                 <TeacherParagraphList paragraphs={teacher.profileInfo}/>
             </Grid>
 
-            <Grid item style={{margin: "auto", width: "60%", padding: "5px", marginBottom:"5%"}}>
+            <Grid item style={{margin: "auto", width: "60%", padding: "5px", marginBottom: "5%"}}>
                 <MyCalendar dateTimes={[
                     new Date(2022, 11, 1),
                     new Date(2022, 11, 10),

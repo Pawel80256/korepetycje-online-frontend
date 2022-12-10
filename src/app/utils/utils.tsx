@@ -16,7 +16,7 @@ export function parseJwt(token: any) {
 }
 
 export const getAverageRating = (opinions: OpinionDto[] | undefined) => {
-    if (opinions === undefined) {
+    if (opinions === undefined || !opinions || opinions.length === 0) {
         return 0;
     }
     const sum = opinions.map(opinion => opinion.numericValue).reduce((total, nv) => total + nv, 0);

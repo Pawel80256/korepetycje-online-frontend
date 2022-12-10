@@ -29,7 +29,7 @@ export const MyCalendar = ({ dateTimes }: Props) => {
             defaultView="month"
             events={events}
             style={{ height: '70vh' }}
-
+            views={['month', 'day', 'agenda']}
             messages={{
                 today: 'Dzisiaj',
                 next: 'Później',
@@ -37,7 +37,7 @@ export const MyCalendar = ({ dateTimes }: Props) => {
                 month:'Miesiąc',
                 week:'Tydzień',
                 day:'Dzień',
-                agenda:'Lista terminów'
+                agenda:'Wszystkie terminy'
             }}
             eventPropGetter={(event: any) => ({
                 style: {
