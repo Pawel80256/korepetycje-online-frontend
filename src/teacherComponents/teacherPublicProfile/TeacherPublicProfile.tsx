@@ -104,7 +104,6 @@ export const TeacherPublicProfile = () => {
                 </Paper>
             </Grid>
 
-
         </Grid>
     )
 }
