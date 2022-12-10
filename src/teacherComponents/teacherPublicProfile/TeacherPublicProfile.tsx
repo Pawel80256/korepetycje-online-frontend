@@ -9,7 +9,7 @@ import {getAverageRating} from "../../app/utils/utils";
 import {TeacherParagraphList} from "../teacherProfileInfo/TeacherParagraphList";
 import StarRatings from 'react-star-ratings';
 import {MyCalendar} from "../calendar/MyCalendar";
-import {OpinionElement} from "../opinions/OpinionElement";
+import {OpinionList} from "../opinions/OpinionList";
 
 export const TeacherPublicProfile = () => {
     const params = useParams();
@@ -103,7 +103,7 @@ export const TeacherPublicProfile = () => {
             {teacher.opinions.length > 0 &&
             <Grid item sx={{display: "flex"}}>
                 <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
-                    <OpinionElement opinion={teacher.opinions[0]}/>
+                    <OpinionList opinions={teacher.opinions}/>
                 </Paper>
             </Grid>
             }

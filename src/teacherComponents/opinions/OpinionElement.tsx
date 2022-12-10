@@ -10,23 +10,22 @@ export interface OpinionElementProps {
 export const OpinionElement: React.FC<OpinionElementProps> = (props) => {
     const {opinion} = props
     return (
-        <Grid container direction={"row"}>
+        <Grid container direction={"row"} sx={{padding: "5px"}}>
 
             <Grid container item direction={"column"} style={{width: "20%"}}>
                 <Typography>
-                    Imie
+                    {opinion.client.userData.firstName}
                 </Typography>
                 <StarRatings rating={opinion.numericValue} numberOfStars={5}
                              starRatedColor="#3990E8" starDimension={"15px"}
                              starSpacing={"1px"}/>
                 <Typography>
-                    12/11/2022
-                    {/*{opinion.createdAt.toLocaleDateString()}*/}
+                    {new Date(opinion.createdAt).toLocaleDateString()}
                 </Typography>
             </Grid>
 
             <Grid item style={{width: "80%"}}>
-                Jest dobrze chłopaki dobrze robią
+                {opinion.textValue}
             </Grid>
 
         </Grid>
