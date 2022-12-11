@@ -91,7 +91,7 @@ export const TeacherPublicProfile = () => {
 
             <Grid item sx={{display: "flex"}}>
                 <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
-                    <MyCalendar dateTimes={teacher.appointments.map(appointment => new Date(appointment.date))}/>
+                    <MyCalendar appointments={teacher.appointments}/>
                 </Paper>
             </Grid>
 

@@ -6,22 +6,23 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 // Import the default time formats provided by the library
 import 'moment/locale/pl';
 import {BookVisitModal} from "../../clientComponents/visitBooking/BookVisitModal";
+import {AppointmentDto} from "../../dtos/models/AppointmentDto";
 
 type Props = {
-    dateTimes: Date[];
-
+    appointments: AppointmentDto[]
 };
 
 export const MyCalendar: React.FC<Props> = (props) => {
     const [isOpenBookVisitModal, setIsOpenBookVisitModal] = useState<boolean>(false)
-    const {dateTimes} = props
+    const {appointments} = props
     moment.locale('pl');
     const localizer = momentLocalizer(moment);
 
-    const events = dateTimes.map((dateTime) => ({
-        start: dateTime,
-        end: new Date(dateTime.getTime() + 30 * 60 * 1000),
+    const events = appointments.map((appointment) => ({
+        start: new Date(appointment.date),
+        end: new Date(new Date(appointment.date).getTime() + 30 * 60 * 1000),
         title: 'Wolny termin',
+        appointmentId: appointment.id
     }));
 
     return (
@@ -52,6 +53,7 @@ export const MyCalendar: React.FC<Props> = (props) => {
                 })}
                 onSelectEvent={(event) => {
                     setIsOpenBookVisitModal(true)
+                    console.log(event)
                 }}
 
             />
