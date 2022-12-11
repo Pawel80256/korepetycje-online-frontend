@@ -14,6 +14,7 @@ type Props = {
 
 export const MyCalendar: React.FC<Props> = (props) => {
     const [isOpenBookVisitModal, setIsOpenBookVisitModal] = useState<boolean>(false)
+    const [selectedAppointmentId, setSelectedAppointmentId] = useState<string>('')
     const {appointments} = props
     moment.locale('pl');
     const localizer = momentLocalizer(moment);
@@ -52,12 +53,14 @@ export const MyCalendar: React.FC<Props> = (props) => {
                     },
                 })}
                 onSelectEvent={(event) => {
+                    setSelectedAppointmentId(event.appointmentId)
                     setIsOpenBookVisitModal(true)
                     console.log(event)
                 }}
 
             />
-            <BookVisitModal open={isOpenBookVisitModal} setOpen={setIsOpenBookVisitModal}/>
+            <BookVisitModal open={isOpenBookVisitModal} setOpen={setIsOpenBookVisitModal}
+                            appointmentId={selectedAppointmentId}/>
         </>
     );
 };

@@ -4,11 +4,12 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import {FormControl, InputLabel, MenuItem, SelectChangeEvent} from "@mui/material";
+import {Button, FormControl, InputLabel, MenuItem, SelectChangeEvent} from "@mui/material";
 import Select from '@mui/material/Select';
 import {getSubjectsByTeacherId} from "../../app/services/SubjectService";
 import {SubjectDto} from "../../dtos/models/Subject";
 import {useParams} from "react-router-dom";
+import {bookAppointment} from "../../app/services/AppointmentService";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -24,12 +25,14 @@ const style = {
 };
 
 export interface BookVisitModalProps {
+    appointmentId: string,
     open: boolean,
     setOpen: (value: boolean) => void
 }
 
 export const BookVisitModal: React.FC<BookVisitModalProps> = (props) => {
-    const {open, setOpen} = props
+    const {open, setOpen, appointmentId} = props
+    const clientUserDataId = localStorage.getItem('userDataId')
     const handleClose = () => setOpen(false);
     const [subject, setSubject] = React.useState('');
     const [subjects, setSubjects] = useState<SubjectDto[]>([])
@@ -73,6 +76,15 @@ export const BookVisitModal: React.FC<BookVisitModalProps> = (props) => {
                                     </MenuItem>
                                 ))}
                             </Select>
+                            <Button
+                                variant="contained"
+                                onClick={() => {
+                                    console.log(appointmentId, clientUserDataId, subject)
+                                    bookAppointment(appointmentId, clientUserDataId!, subject)
+                                }}
+                            >
+                                Umów spotkanie
+                            </Button>
                         </FormControl>
                     </Box>
                 </Fade>
