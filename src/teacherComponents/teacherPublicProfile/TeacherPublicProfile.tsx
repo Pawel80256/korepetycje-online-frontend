@@ -11,11 +11,13 @@ import StarRatings from 'react-star-ratings';
 import {MyCalendar} from "../calendar/MyCalendar";
 import {OpinionList} from "../opinions/OpinionList";
 import OpinionNumericValueList from "../opinions/OpinionNumericValueList";
+import {CreateAppointmentModal} from "../calendar/CreateAppointmentModal";
 
 export const TeacherPublicProfile = () => {
     const params = useParams();
     const {teacherId} = params
     const [teacher, setTeacher] = useState<TeacherDto>(initialTeacherDto)
+    const [isOpenCreateAppointmentModal, setIsOpenCreateAppointmentModal] = useState<boolean>(false)
     //todo:determine role from redux or smth
     const isTeacher: boolean = true
 
@@ -93,7 +95,17 @@ export const TeacherPublicProfile = () => {
 
             <Grid item sx={{display: "flex"}}>
                 <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
+
                     <MyCalendar appointments={teacher.appointments}/>
+                    {isTeacher &&
+                    <Button
+                        variant={"contained"}
+                        fullWidth
+                        onClick={() => setIsOpenCreateAppointmentModal(true)}
+                    >
+                        Dodaj termin
+                    </Button>
+                    }
                 </Paper>
             </Grid>
 
@@ -105,7 +117,7 @@ export const TeacherPublicProfile = () => {
                     <OpinionList opinions={teacher.opinions}/>
                 </Paper>
             </Grid>
-
+            <CreateAppointmentModal open={isOpenCreateAppointmentModal} setOpen={setIsOpenCreateAppointmentModal}/>
         </Grid>
     )
 }
