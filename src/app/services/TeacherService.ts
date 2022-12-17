@@ -41,3 +41,15 @@ export const addToProfileInfo = async (teacherId: string, paragraph: AddParagrap
         console.log(error)
     }
 }
+
+export const changeParagraphOrder = async (teacherId: string, paragraphId: string, orderUp: boolean) => {
+    try {
+        axios.put(`http://localhost:8080/api/teacher/${teacherId}/paragraph/${paragraphId}/order`,
+            null,
+            {
+                params: {orderUp}
+            })
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -8,6 +8,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {useState} from "react";
 import {ParagraphInputModal} from "./ParagraphInputModal";
 import {EditProfileInfoOrderModal} from "./EditProfileInfoOrderModal";
+import {changeParagraphOrder} from "../../app/services/TeacherService";
+import {useParams} from "react-router-dom";
 
 export interface TeacherParagraphListProps {
     paragraphs: ParagraphDto[]
@@ -18,6 +20,9 @@ export const TeacherParagraphList: React.FC<TeacherParagraphListProps> = (props)
     const {paragraphs, isTeacher} = props
     const [isOpenAddParagraphModal, setIsOpenAddParagraphModal] = useState<boolean>(false)
     const [isOpenOrderModal, setIsOpenOrderModal] = useState<boolean>(false)
+    //todo: take id from localstorage
+    const params = useParams();
+    const {teacherId} = params
     return (
         <Grid container direction={"column"}>
             <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
@@ -43,10 +48,18 @@ export const TeacherParagraphList: React.FC<TeacherParagraphListProps> = (props)
                             <KeyboardArrowDownIcon
                                 style={{margin: "auto"}}
                                 sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
+                                onClick={() => {
+                                    changeParagraphOrder(teacherId!, p.id, false)
+                                    window.location.reload()
+                                }}
                             />
                             <KeyboardArrowUpIcon
                                 style={{margin: "auto"}}
                                 sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
+                                onClick={() => {
+                                    changeParagraphOrder(teacherId!, p.id, true)
+                                    window.location.reload()
+                                }}
                             />
                         </Grid>
                         <TeacherParagraphElement paragraph={p} isTeacher={isTeacher}/>
