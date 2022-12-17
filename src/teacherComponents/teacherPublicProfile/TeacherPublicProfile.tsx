@@ -16,6 +16,8 @@ export const TeacherPublicProfile = () => {
     const params = useParams();
     const {teacherId} = params
     const [teacher, setTeacher] = useState<TeacherDto>(initialTeacherDto)
+    //todo:determine role from redux or smth
+    const isTeacher: boolean = true
 
     useEffect(() => {
         getTeacherById(teacherId!).then(response => {
@@ -86,7 +88,7 @@ export const TeacherPublicProfile = () => {
             </Grid>
 
             <Grid item>
-                <TeacherParagraphList paragraphs={teacher.profileInfo}/>
+                <TeacherParagraphList paragraphs={teacher.profileInfo} isTeacher={isTeacher}/>
             </Grid>
 
             <Grid item sx={{display: "flex"}}>
