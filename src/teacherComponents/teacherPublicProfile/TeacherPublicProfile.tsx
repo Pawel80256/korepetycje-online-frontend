@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import Typography from "@mui/material/Typography";
 import {getTeacherById} from "../../app/services/TeacherService";
 import {initialTeacherDto, TeacherDto} from "../../dtos/models/Teacher";
-import {getAverageRating} from "../../app/utils/utils";
+import {getAverageRating, sortParagraphsByOrder} from "../../app/utils/utils";
 import {TeacherParagraphList} from "../teacherProfileInfo/TeacherParagraphList";
 import StarRatings from 'react-star-ratings';
 import {MyCalendar} from "../calendar/MyCalendar";
@@ -88,7 +88,7 @@ export const TeacherPublicProfile = () => {
             </Grid>
 
             <Grid item>
-                <TeacherParagraphList paragraphs={teacher.profileInfo} isTeacher={isTeacher}/>
+                <TeacherParagraphList paragraphs={sortParagraphsByOrder(teacher.profileInfo)} isTeacher={isTeacher}/>
             </Grid>
 
             <Grid item sx={{display: "flex"}}>

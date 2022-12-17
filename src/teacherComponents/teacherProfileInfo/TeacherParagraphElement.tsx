@@ -1,8 +1,9 @@
 import {ParagraphDto} from "../../dtos/models/ParagraphDto";
-import {Grid, Paper, Typography} from "@mui/material";
+import {Grid, Typography} from "@mui/material";
 
 export interface TeacherParagraphElementProps {
     paragraph: ParagraphDto
+    isTeacher: boolean
 }
 
 export const TeacherParagraphElement: React.FC<TeacherParagraphElementProps> = (props: TeacherParagraphElementProps) => {
@@ -18,7 +19,7 @@ export const TeacherParagraphElement: React.FC<TeacherParagraphElementProps> = (
                 </Typography>
             </Grid>
 
-            <Grid item style={{marginLeft:"10%",marginRight:"10%"}}>
+            <Grid item style={{marginLeft: "10%", marginRight: "10%"}}>
                 <Typography>
                     {paragraph.content}
                 </Typography>
