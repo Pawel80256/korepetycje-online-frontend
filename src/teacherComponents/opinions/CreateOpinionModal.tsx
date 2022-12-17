@@ -27,7 +27,7 @@ const style = {
 
 export const CreateOpinionModal: React.FC<CreateOpinionModalProps> = (props) => {
     const {open, setOpen} = props
-    const clientUserDataId = localStorage.getItem('userDataId')
+    const clientId = localStorage.getItem('userDataId')
     const handleClose = () => setOpen(false);
     const params = useParams();
     const {teacherId} = params
@@ -51,7 +51,7 @@ export const CreateOpinionModal: React.FC<CreateOpinionModalProps> = (props) => 
                             text: ''
                         }}
                         onSubmit={(values) => {
-                            createOpinion(values.rating, values.text, clientUserDataId!, teacherId!)
+                            createOpinion(values.rating, values.text, clientId!, teacherId!)
                             window.location.reload();
                         }}
                     >

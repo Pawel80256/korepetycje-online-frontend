@@ -1,4 +1,5 @@
 import axios from "axios";
+import {AddParagraphRequestDto} from "../../dtos/models/ParagraphDto";
 
 export const getTeacherById = async (teacherId: string) => {
     try {
@@ -25,6 +26,17 @@ export const getTeachersBySubjectAndCity = async (subject: string, city: string)
             {params: {subject, city}}
         )
         return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const addToProfileInfo = async (teacherId: string, paragraph: AddParagraphRequestDto) => {
+    try {
+        await axios.post(`http://localhost:8080/api/teacher/${teacherId}/profileInfo`,
+            {
+                paragraphs: [paragraph]
+            })
     } catch (error) {
         console.log(error)
     }

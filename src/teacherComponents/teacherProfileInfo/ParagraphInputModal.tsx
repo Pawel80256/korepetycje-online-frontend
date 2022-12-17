@@ -4,6 +4,8 @@ import {Box, Fade, Grid, Modal, TextField} from "@mui/material";
 import {useFormik} from "formik";
 import Button from "@mui/material/Button";
 import * as React from "react";
+import {addToProfileInfo} from "../../app/services/TeacherService";
+import {AddParagraphRequestDto} from "../../dtos/models/ParagraphDto";
 
 export interface ParagraphInputModalProps {
     open: boolean,
@@ -35,6 +37,11 @@ export const ParagraphInputModal: React.FC<ParagraphInputModalProps> = (props) =
         initialValues: {header: '', content: ''},
         onSubmit: (values) => {
             console.log(values)
+            const paragraph: AddParagraphRequestDto = {
+                title: values.header,
+                content: values.content
+            }
+            addToProfileInfo(teacherId!, paragraph)
         }
     });
 

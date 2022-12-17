@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const createOpinion = async (numericValue: number, textValue: string, clientUserDataId: string, teacherId: string) => {
+export const createOpinion = async (numericValue: number, textValue: string, clientId: string, teacherId: string) => {
     try {
         await axios.post("http://localhost:8080/api/opinion",
             {
-                clientUserDataId,
+                clientId,
                 teacherId,
                 textValue,
                 numericValue,

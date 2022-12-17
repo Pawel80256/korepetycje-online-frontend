@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export const bookAppointment = async (appointmentId: string, userDataId: string, subjectName: string) => {
+export const bookAppointment = async (appointmentId: string, clientId: string, subjectName: string) => {
     try {
         await axios.put(`http://localhost:8080/api/appointment/${appointmentId}/book`,
             null,
             {
                 params: {
-                    userDataId,
+                    clientId,
                     subjectName
                 }
             })

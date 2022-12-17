@@ -32,7 +32,7 @@ export interface BookVisitModalProps {
 
 export const BookVisitModal: React.FC<BookVisitModalProps> = (props) => {
     const {open, setOpen, appointmentId} = props
-    const clientUserDataId = localStorage.getItem('userDataId')
+    const clientId = localStorage.getItem('userDataId')
     const handleClose = () => setOpen(false);
     const [subject, setSubject] = React.useState('');
     const [subjects, setSubjects] = useState<SubjectDto[]>([])
@@ -79,8 +79,8 @@ export const BookVisitModal: React.FC<BookVisitModalProps> = (props) => {
                             <Button
                                 variant="contained"
                                 onClick={() => {
-                                    console.log(appointmentId, clientUserDataId, subject)
-                                    bookAppointment(appointmentId, clientUserDataId!, subject)
+                                    console.log(appointmentId, clientId, subject)
+                                    bookAppointment(appointmentId, clientId!, subject)
                                 }}
                             >
                                 Umów spotkanie
