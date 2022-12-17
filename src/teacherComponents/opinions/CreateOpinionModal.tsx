@@ -3,6 +3,7 @@ import Backdrop from "@mui/material/Backdrop";
 import {Box, Button, Fade, Grid, Modal, TextField} from "@mui/material";
 import {Form, Formik} from 'formik';
 import StarRatings from 'react-star-ratings';
+import {createOpinion} from "../../app/services/OpinionService";
 
 export interface CreateOpinionModalProps {
     open: boolean,
@@ -50,7 +51,8 @@ export const CreateOpinionModal: React.FC<CreateOpinionModalProps> = (props) => 
                             text: ''
                         }}
                         onSubmit={(values) => {
-                            console.log(values);
+                            createOpinion(values.rating, values.text, clientUserDataId!, teacherId!)
+                            window.location.reload();
                         }}
                     >
                         {({values, handleChange}) => (
