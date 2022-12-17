@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {OpinionDto} from "../../dtos/models/Opinion";
-import {Grid, Typography} from '@mui/material';
+import {Button, Grid, Typography} from '@mui/material';
 import StarRatings from "react-star-ratings";
 import {getAverageRating} from "../../app/utils/utils";
+import {CreateOpinionModal} from "./CreateOpinionModal";
 
 interface Props {
     opinions: OpinionDto[];
 }
 
 export const OpinionNumericValueList: React.FC<Props> = ({opinions}) => {
+    const [isOpenCreateOpinionModal, setIsOpenCreateOpinionModal] = useState<boolean>(false)
+
     const opinionCounts = [1, 2, 3, 4, 5].map(value =>
         opinions.filter(opinion => opinion.numericValue === value).length
     );
@@ -25,6 +28,13 @@ export const OpinionNumericValueList: React.FC<Props> = ({opinions}) => {
                                  starSpacing={"1px"}/>
                 </Grid>
                 <Typography fontSize={"30px"}>&nbsp;{` ${getAverageRating(opinions)} / 5`}</Typography>
+                <Button
+                    variant="contained"
+                    style={{marginLeft: "40%"}}
+                    onClick={() => setIsOpenCreateOpinionModal(true)}
+                >
+                    Dodaj opinię
+                </Button>
             </Grid>
 
 
@@ -39,6 +49,7 @@ export const OpinionNumericValueList: React.FC<Props> = ({opinions}) => {
                     </Grid>
                 ))}
             </Grid>
+            <CreateOpinionModal open={isOpenCreateOpinionModal} setOpen={setIsOpenCreateOpinionModal}/>
         </Grid>
     );
 };
