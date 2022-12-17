@@ -53,3 +53,11 @@ export const changeParagraphOrder = async (teacherId: string, paragraphId: strin
         console.log(error)
     }
 }
+
+export const deleteParagraph = async (teacherId: string, paragraphId: string) => {
+    try {
+        axios.delete(`http://localhost:8080/api/teacher/${teacherId}/profileInfo/${paragraphId}`)
+    } catch (error) {
+        console.log(error)
+    }
+}
