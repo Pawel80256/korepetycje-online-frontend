@@ -6,7 +6,7 @@ import {LoginForm} from "./authentication/LoginForm";
 import {CssBaseline} from "@mui/material";
 import {SearchTeacherPage} from "./teacherComponents/searchTeacherPage/SearchTeacherPage";
 import {TeacherPublicProfile} from "./teacherComponents/teacherPublicProfile/TeacherPublicProfile";
-import {NewRegisterForm} from "./authentication/NewRegisterForm";
+import {RegisterForm} from "./authentication/RegisterForm";
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
             <CssBaseline/>
             <Routes>
                 <Route path={AppRoutes.HOME} element={<></>}/>
-                <Route path={AppRoutes.REGISTER} element={<NewRegisterForm/>}/>
+                <Route path={AppRoutes.REGISTER} element={<RegisterForm/>}/>
                 <Route path={AppRoutes.LOGIN} element={<LoginForm/>}/>
                 <Route path={AppRoutes.SEARCH} element={<SearchTeacherPage/>}/>
                 <Route path={AppRoutes.TEACHER_PUBLIC_PROFILE} element={<TeacherPublicProfile/>}/>
