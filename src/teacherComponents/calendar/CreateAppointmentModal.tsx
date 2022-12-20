@@ -1,5 +1,10 @@
 import Backdrop from "@mui/material/Backdrop";
-import {Box, Fade, Modal} from "@mui/material";
+import {Box, Button, Fade, Modal, TextField} from "@mui/material";
+import {useState} from "react";
+import dayjs, {Dayjs} from 'dayjs';
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
 
 export interface CreateAppointmentModalProps {
     open: boolean,
@@ -24,6 +29,13 @@ const style = {
 export const CreateAppointmentModal: React.FC<CreateAppointmentModalProps> = (props) => {
     const {open, setOpen} = props
     const handleClose = () => setOpen(false);
+    const [value, setValue] = useState<Dayjs | null>(
+        dayjs('2014-08-18T21:11:54'),
+    );
+
+    const handleChange = (newValue: Dayjs | null) => {
+        setValue(newValue);
+    };
 
     return (
         <Modal
@@ -39,7 +51,20 @@ export const CreateAppointmentModal: React.FC<CreateAppointmentModalProps> = (pr
         >
             <Fade in={open}>
                 <Box sx={style}>
-                    <>xd</>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                        <DateTimePicker
+                            label="Date&Time picker"
+                            value={value}
+                            onChange={handleChange}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                        <Button variant="contained" onClick={() => {
+                            console.log(value?.toISOString())
+                        }}>
+                            Dodaj
+                        </Button>
+                    </LocalizationProvider>
                 </Box>
             </Fade>
         </Modal>
