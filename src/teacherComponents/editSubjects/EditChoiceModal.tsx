@@ -1,10 +1,14 @@
 import {useParams} from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import {Box, Button, ButtonGroup, Fade, Grid, Modal, Typography} from "@mui/material";
+import {SubjectDto} from "../../dtos/models/Subject";
+import {useState} from "react";
+import {SubjectToEditList} from "./SubjectToEditList";
 
 export interface EditChoiceModalProps {
     open: boolean,
     setOpen: (value: boolean) => void
+    subjects: SubjectDto[]
 }
 
 const style = {
@@ -23,10 +27,12 @@ const style = {
 };
 
 export const EditChoiceModal: React.FC<EditChoiceModalProps> = (props) => {
-    const {open, setOpen} = props
+    const {open, setOpen, subjects} = props
     const handleClose = () => setOpen(false);
     const params = useParams();
     const {teacherId} = params
+    const [isAdding, setIsAdding] = useState<boolean>(false)
+    const [isDeleting, setIsDeleting] = useState<boolean>(true)
 
     return (<Modal
         aria-labelledby="transition-modal-title"
@@ -54,6 +60,8 @@ export const EditChoiceModal: React.FC<EditChoiceModalProps> = (props) => {
                         <Button fullWidth>Dodaj</Button>
                         <Button fullWidth>Usuń</Button>
                     </ButtonGroup>
+                    {isDeleting &&
+                    <SubjectToEditList subjects={subjects}/>}
                 </Grid>
             </Box>
         </Fade>

@@ -128,7 +128,8 @@ export const TeacherPublicProfile = () => {
                 </Paper>
             </Grid>
             <CreateAppointmentModal open={isOpenCreateAppointmentModal} setOpen={setIsOpenCreateAppointmentModal}/>
-            <EditChoiceModal open={isOpenEditChoiceModal} setOpen={setIsOpenEditChoiceModal}/>
+            <EditChoiceModal open={isOpenEditChoiceModal} setOpen={setIsOpenEditChoiceModal}
+                             subjects={teacher.subjects}/>
         </Grid>
     )
 }
