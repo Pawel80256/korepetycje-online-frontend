@@ -1,6 +1,8 @@
 import {SubjectDto} from "../../dtos/models/Subject";
 import {IconButton, List, ListItem, ListItemText} from "@mui/material";
 import {Delete} from "@mui/icons-material";
+import {deleteSubject} from "../../app/services/SubjectService";
+import {useParams} from "react-router-dom";
 
 export interface SubjectToEditListProps {
     subjects: SubjectDto[]
@@ -8,9 +10,11 @@ export interface SubjectToEditListProps {
 
 export const SubjectToEditList: React.FC<SubjectToEditListProps> = (props) => {
     const {subjects} = props
-
+    const params = useParams();
+    const {teacherId} = params
     const handleDelete = (subjectName: string) => {
-        console.log(`Usuwanie przedmiotu: ${subjectName}`);
+        deleteSubject(teacherId!, subjectName)
+        window.location.reload()
     };
 
     return (

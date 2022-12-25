@@ -17,3 +17,23 @@ export const getSubjectsByTeacherId = async (teacherId: string) => {
         console.log(error)
     }
 }
+
+export const addSubject = async (teacherId: string, subjectName: string) => {
+    try {
+        await axios.post(`http://localhost:8080/api/teacher/${teacherId}/subject`, null, {
+            params: {subjectName}
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteSubject = async (teacherId: string, subjectName: string) => {
+    try {
+        await axios.delete(`http://localhost:8080/api/teacher/${teacherId}/subject`, {
+            params: {subjectName}
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}

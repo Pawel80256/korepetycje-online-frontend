@@ -4,6 +4,7 @@ import {Box, Button, ButtonGroup, Fade, Grid, Modal, TextField, Typography} from
 import {SubjectDto} from "../../dtos/models/Subject";
 import {useState} from "react";
 import {SubjectToEditList} from "./SubjectToEditList";
+import {addSubject} from "../../app/services/SubjectService";
 
 export interface EditChoiceModalProps {
     open: boolean,
@@ -85,7 +86,8 @@ export const EditChoiceModal: React.FC<EditChoiceModalProps> = (props) => {
                             onChange={(event => setSubjectName(event.target.value))}
                         />
                         <Button variant={"contained"} onClick={() => {
-                            console.log(subjectName)
+                            addSubject(teacherId!, subjectName)
+                            window.location.reload()
                         }}>Dodaj przedmiot</Button>
                     </Grid>
                     }
