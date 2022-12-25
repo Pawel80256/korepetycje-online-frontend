@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
-import {Box, Button, ButtonGroup, Fade, Grid, Modal, Typography} from "@mui/material";
+import {Box, Button, ButtonGroup, Fade, Grid, Modal, TextField, Typography} from "@mui/material";
 import {SubjectDto} from "../../dtos/models/Subject";
 import {useState} from "react";
 import {SubjectToEditList} from "./SubjectToEditList";
@@ -32,7 +32,18 @@ export const EditChoiceModal: React.FC<EditChoiceModalProps> = (props) => {
     const params = useParams();
     const {teacherId} = params
     const [isAdding, setIsAdding] = useState<boolean>(false)
-    const [isDeleting, setIsDeleting] = useState<boolean>(true)
+    const [isDeleting, setIsDeleting] = useState<boolean>(false)
+    const [subjectName, setSubjectName] = useState<string>('')
+
+    const toggleDeleting = () => {
+        setIsAdding(false)
+        setIsDeleting(!isDeleting)
+    }
+
+    const toggleAdding = () => {
+        setIsDeleting(false)
+        setIsAdding(!isAdding)
+    }
 
     return (<Modal
         aria-labelledby="transition-modal-title"
@@ -57,11 +68,27 @@ export const EditChoiceModal: React.FC<EditChoiceModalProps> = (props) => {
                         aria-label="Disabled elevation buttons"
                         style={{width: "100%"}}
                     >
-                        <Button fullWidth>Dodaj</Button>
-                        <Button fullWidth>Usuń</Button>
+                        <Button fullWidth onClick={toggleAdding}>Dodaj</Button>
+                        <Button fullWidth onClick={toggleDeleting}>Usuń</Button>
                     </ButtonGroup>
+
                     {isDeleting &&
                     <SubjectToEditList subjects={subjects}/>}
+
+                    {isAdding &&
+                    <Grid container item style={{margin: "auto", marginTop: "2%"}} direction={"column"}>
+                        <TextField
+                            label="Przedmiot nauczania"
+                            id="subjectName"
+                            name="subjectName"
+                            value={subjectName}
+                            onChange={(event => setSubjectName(event.target.value))}
+                        />
+                        <Button variant={"contained"} onClick={() => {
+                            console.log(subjectName)
+                        }}>Dodaj przedmiot</Button>
+                    </Grid>
+                    }
                 </Grid>
             </Box>
         </Fade>
