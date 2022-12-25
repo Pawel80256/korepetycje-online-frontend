@@ -61,3 +61,13 @@ export const deleteParagraph = async (teacherId: string, paragraphId: string) =>
         console.log(error)
     }
 }
+
+export const updateCity = async (teacherId: string, city: string) => {
+    try {
+        axios.put(`http://localhost:8080/api/teacher/${teacherId}/city`, null, {
+            params: {city}
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
