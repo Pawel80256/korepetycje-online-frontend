@@ -12,12 +12,15 @@ import {MyCalendar} from "../calendar/MyCalendar";
 import {OpinionList} from "../opinions/OpinionList";
 import OpinionNumericValueList from "../opinions/OpinionNumericValueList";
 import {CreateAppointmentModal} from "../calendar/CreateAppointmentModal";
+import EditIcon from '@mui/icons-material/Edit';
+import {EditChoiceModal} from "../editSubjects/EditChoiceModal";
 
 export const TeacherPublicProfile = () => {
     const params = useParams();
     const {teacherId} = params
     const [teacher, setTeacher] = useState<TeacherDto>(initialTeacherDto)
     const [isOpenCreateAppointmentModal, setIsOpenCreateAppointmentModal] = useState<boolean>(false)
+    const [isOpenEditChoiceModal, setIsOpenEditChoiceModal] = useState<boolean>(false)
     //todo:determine role from redux or smth
     const isTeacher: boolean = true
 
@@ -51,11 +54,18 @@ export const TeacherPublicProfile = () => {
                             <Grid item>
                                 <Typography gutterBottom variant="subtitle1" component="div">
                                     {`Korepetytor przedmiotów: ${teacher?.subjects.map(s => s.subjectName).join(", ")}`}
+                                    <EditIcon
+                                        fontSize={"small"}
+                                        onClick={() => setIsOpenEditChoiceModal(true)}
+                                        sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
+                                    />
                                 </Typography>
                             </Grid>
                             <Grid item>
                                 <Typography gutterBottom variant="subtitle1" component="div" color="text.secondary">
                                     {teacher?.city}
+                                    <EditIcon sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
+                                              fontSize={"small"}/>
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -118,6 +128,7 @@ export const TeacherPublicProfile = () => {
                 </Paper>
             </Grid>
             <CreateAppointmentModal open={isOpenCreateAppointmentModal} setOpen={setIsOpenCreateAppointmentModal}/>
+            <EditChoiceModal open={isOpenEditChoiceModal} setOpen={setIsOpenEditChoiceModal}/>
         </Grid>
     )
 }
