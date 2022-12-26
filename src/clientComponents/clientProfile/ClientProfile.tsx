@@ -1,9 +1,9 @@
 import {useParams} from "react-router-dom";
 import {Grid, Paper, Typography} from "@mui/material";
-import {AppointmentElement} from "../appointments/appointmentElement";
 import {useEffect, useState} from "react";
 import {ClientDto, initialClientDto} from "../../dtos/models/Client";
 import {getClientById} from "../../app/services/ClientService";
+import {AppointmentList} from "../appointments/AppointmentList";
 
 export const ClientProfile = () => {
     const params = useParams()
@@ -11,7 +11,10 @@ export const ClientProfile = () => {
     const [client, setClient] = useState<ClientDto>(initialClientDto)
 
     useEffect(() => {
-        getClientById(clientId!).then(response => setClient(response))
+        getClientById(clientId!).then(response => {
+            console.log(response)
+            setClient(response)
+        })
     }, [])
 
     return (
@@ -34,7 +37,7 @@ export const ClientProfile = () => {
                     <Typography style={{fontSize: "150%", fontWeight: "bold"}}>
                         Umówione wizyty
                     </Typography>
-                    <AppointmentElement/>
+                    <AppointmentList appointments={client.appointments}/>
                 </Paper>
             </Grid>
             <Grid item container sx={{display: "flex"}} direction={"row"}>

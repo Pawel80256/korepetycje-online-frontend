@@ -6,7 +6,7 @@ export interface AppointmentElementProps {
     appointment: AppointmentDto
 }
 
-export const AppointmentElement = () => {
+export const AppointmentElement: React.FC<AppointmentElementProps> = (props) => {
     return (
         <Paper style={{margin: "auto", width: "90%", padding: "5px", backgroundColor: "#ECF8FF"}}>
             <Grid item container direction={"row"}>
