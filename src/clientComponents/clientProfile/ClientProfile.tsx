@@ -1,22 +1,31 @@
 import {useParams} from "react-router-dom";
 import {Grid, Paper, Typography} from "@mui/material";
 import {AppointmentElement} from "../appointments/appointmentElement";
+import {useEffect, useState} from "react";
+import {ClientDto, initialClientDto} from "../../dtos/models/Client";
+import {getClientById} from "../../app/services/ClientService";
 
 export const ClientProfile = () => {
     const params = useParams()
+    const clientId = params.clientId
+    const [client, setClient] = useState<ClientDto>(initialClientDto)
+
+    useEffect(() => {
+        getClientById(clientId!).then(response => setClient(response))
+    }, [])
 
     return (
         <Grid container sx={{display: "flex", marginTop: "2%", marginBottom: "2%"}} direction={"column"} spacing={2}>
             <Grid item container sx={{display: "flex"}} direction={"row"}>
                 <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
                     <Typography>
-                        imie
+                        {client.userData.firstName}
                     </Typography>
                     <Typography>
-                        nazwisko
+                        {client.userData.lastName}
                     </Typography>
                     <Typography>
-                        email
+                        {client.userData.emailAddress}
                     </Typography>
                 </Paper>
             </Grid>
