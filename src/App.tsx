@@ -7,6 +7,7 @@ import {CssBaseline} from "@mui/material";
 import {SearchTeacherPage} from "./teacherComponents/searchTeacherPage/SearchTeacherPage";
 import {TeacherPublicProfile} from "./teacherComponents/teacherPublicProfile/TeacherPublicProfile";
 import {RegisterForm} from "./authentication/RegisterForm";
+import {ClientProfile} from "./clientComponents/clientProfile/ClientProfile";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                 <Route path={AppRoutes.LOGIN} element={<LoginForm/>}/>
                 <Route path={AppRoutes.SEARCH} element={<SearchTeacherPage/>}/>
                 <Route path={AppRoutes.TEACHER_PUBLIC_PROFILE} element={<TeacherPublicProfile/>}/>
+                <Route path={AppRoutes.CLIENT_PROFILE} element={<ClientProfile/>}/>
             </Routes>
         </>
     );
