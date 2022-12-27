@@ -66,6 +66,7 @@ export const CreateOpinionModal: React.FC<CreateOpinionModalProps> = (props) => 
                                     <Grid item xs={6} style={{margin: "auto"}}>
                                         <StarRatings
                                             rating={values.rating}
+                                            starHoverColor={"blue"}
                                             changeRating={(newRating) => handleChange({
                                                 target: {
                                                     name: 'rating',

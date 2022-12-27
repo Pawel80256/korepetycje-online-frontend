@@ -32,7 +32,7 @@ export const OpinionNumericValueList: React.FC<Props> = ({opinions}) => {
                 {role === Roles.CLIENT &&
                 <Button
                     variant="contained"
-                    style={{marginLeft: "40%"}}
+                    style={{marginLeft: "2%"}}
                     onClick={() => setIsOpenCreateOpinionModal(true)}
                 >
                     Dodaj opinię
