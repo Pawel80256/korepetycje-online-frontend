@@ -37,7 +37,7 @@ export const ClientProfile = () => {
                     <Typography style={{fontSize: "150%", fontWeight: "bold"}}>
                         Umówione wizyty
                     </Typography>
-                    <AppointmentList appointments={client.appointments}/>
+                    <AppointmentList appointments={client.appointments.filter(appointment => new Date(appointment.date).getTime() > new Date().getTime())}/>
                 </Paper>
             </Grid>
             <Grid item container sx={{display: "flex"}} direction={"row"}>
@@ -45,6 +45,7 @@ export const ClientProfile = () => {
                     <Typography style={{fontSize: "150%", fontWeight: "bold"}}>
                         Historia wizyt
                     </Typography>
+                    <AppointmentList appointments={client.appointments.filter(appointment => new Date(appointment.date).getTime() <= new Date().getTime())}/>
                 </Paper>
             </Grid>
         </Grid>

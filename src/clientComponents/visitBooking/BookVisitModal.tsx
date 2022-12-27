@@ -81,6 +81,7 @@ export const BookVisitModal: React.FC<BookVisitModalProps> = (props) => {
                                 onClick={() => {
                                     console.log(appointmentId, clientId, subject)
                                     bookAppointment(appointmentId, clientId!, subject)
+                                    window.location.reload()
                                 }}
                             >
                                 Umów spotkanie

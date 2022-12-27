@@ -32,7 +32,7 @@ export const AppointmentElement: React.FC<AppointmentElementProps> = (props) => 
                     <Typography>
                         {new Date(appointment.date).toLocaleDateString()}
                         <br/>
-                        {new Date(appointment.date).getUTCHours()}:{new Date(appointment.date).getUTCMinutes()}
+                        {new Date(appointment.date).getUTCHours()+2}:{new Date(appointment.date).getUTCMinutes()}
                     </Typography>
                     <Typography>
                         {appointment.subject.subjectName}

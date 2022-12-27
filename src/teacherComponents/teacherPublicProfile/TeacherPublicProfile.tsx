@@ -140,7 +140,7 @@ export const TeacherPublicProfile = () => {
             <Grid item sx={{display: "flex"}}>
                 <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
 
-                    <MyCalendar appointments={teacher.appointments}/>
+                    <MyCalendar appointments={teacher.appointments.filter(a => a.subject === null)}/>
                     {isTeacher &&
                     <Button
                         variant={"contained"}
