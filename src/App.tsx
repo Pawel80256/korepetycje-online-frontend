@@ -8,9 +8,11 @@ import {SearchTeacherPage} from "./teacherComponents/searchTeacherPage/SearchTea
 import {TeacherPublicProfile} from "./teacherComponents/teacherPublicProfile/TeacherPublicProfile";
 import {RegisterForm} from "./authentication/RegisterForm";
 import {ClientProfile} from "./clientComponents/clientProfile/ClientProfile";
+import {Roles} from "./app/enums/Roles";
 
 
 function App() {
+    const role = localStorage.getItem("role")
     return (
         <>
             <NavigationBar/>
@@ -21,7 +23,10 @@ function App() {
                 <Route path={AppRoutes.LOGIN} element={<LoginForm/>}/>
                 <Route path={AppRoutes.SEARCH} element={<SearchTeacherPage/>}/>
                 <Route path={AppRoutes.TEACHER_PUBLIC_PROFILE} element={<TeacherPublicProfile/>}/>
+                {role === Roles.CLIENT &&
                 <Route path={AppRoutes.CLIENT_PROFILE} element={<ClientProfile/>}/>
+                }
+
             </Routes>
         </>
     );

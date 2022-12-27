@@ -4,6 +4,7 @@ import {Box, Button, Fade, Grid, Modal, TextField} from "@mui/material";
 import {Form, Formik} from 'formik';
 import StarRatings from 'react-star-ratings';
 import {createOpinion} from "../../app/services/OpinionService";
+import {useSnackbar} from "notistack";
 
 export interface CreateOpinionModalProps {
     open: boolean,
@@ -31,6 +32,7 @@ export const CreateOpinionModal: React.FC<CreateOpinionModalProps> = (props) => 
     const handleClose = () => setOpen(false);
     const params = useParams();
     const {teacherId} = params
+    const {enqueueSnackbar} = useSnackbar()
     return (<>
         <Modal
             aria-labelledby="transition-modal-title"
@@ -51,8 +53,11 @@ export const CreateOpinionModal: React.FC<CreateOpinionModalProps> = (props) => 
                             text: ''
                         }}
                         onSubmit={(values) => {
-                            createOpinion(values.rating, values.text, clientId!, teacherId!)
-                            window.location.reload();
+                            if(values.text.length > 254){
+                            enqueueSnackbar("Maksymalna długość tekstu opinii to 255 znaków", {variant:'error'})
+                            }else{
+                                createOpinion(values.rating, values.text, clientId!, teacherId!).then(()=> window.location.reload())
+                            }
                         }}
                     >
                         {({values, handleChange}) => (

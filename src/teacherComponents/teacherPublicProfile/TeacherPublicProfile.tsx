@@ -29,6 +29,7 @@ export const TeacherPublicProfile = () => {
     //todo:determine role from redux or smth
     const isTeacher: boolean = true
     const role = localStorage.getItem("role")
+    const loggedUserId = localStorage.getItem("userDataId")
 
     useEffect(() => {
         getTeacherById(teacherId!).then(response => {
@@ -60,7 +61,7 @@ export const TeacherPublicProfile = () => {
                             <Grid item>
                                 <Typography gutterBottom variant="subtitle1" component="div">
                                     {`Korepetytor przedmiotów: ${teacher?.subjects.map(s => s.subjectName).join(", ")}`}
-                                    {role === Roles.TEACHER &&
+                                    {(role === Roles.TEACHER && loggedUserId === teacherId) &&
                                     <EditIcon
                                         fontSize={"small"}
                                         onClick={() => setIsOpenEditChoiceModal(true)}
@@ -97,7 +98,7 @@ export const TeacherPublicProfile = () => {
                                     :
                                     <Typography gutterBottom variant="subtitle1" component="div" color="text.secondary">
                                         {teacher?.city}
-                                        {role === Roles.TEACHER &&
+                                        {(role === Roles.TEACHER && loggedUserId === teacherId) &&
                                         <EditIcon
                                             sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
                                             fontSize={"small"}
@@ -145,7 +146,7 @@ export const TeacherPublicProfile = () => {
                 <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
 
                     <MyCalendar appointments={teacher.appointments.filter(a => a.subject === null)}/>
-                    {role === Roles.TEACHER &&
+                    {(role === Roles.TEACHER && loggedUserId === teacherId) &&
                     <Button
                         variant={"contained"}
                         fullWidth

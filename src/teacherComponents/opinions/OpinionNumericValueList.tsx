@@ -28,7 +28,7 @@ export const OpinionNumericValueList: React.FC<Props> = ({opinions}) => {
                                  starRatedColor="#3990E8" starDimension={"30px"}
                                  starSpacing={"1px"}/>
                 </Grid>
-                <Typography fontSize={"30px"}>&nbsp;{` ${getAverageRating(opinions)} / 5`}</Typography>
+                <Typography fontSize={"30px"}>&nbsp;{` ${getAverageRating(opinions).toFixed(2)} / 5`}</Typography>
                 {role === Roles.CLIENT &&
                 <Button
                     variant="contained"

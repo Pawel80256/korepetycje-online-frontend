@@ -22,26 +22,33 @@ export const NavigationBar = () => {
                         </MenuItem>
                     </Grid>
                     <Grid item xs={7}/>
+                    {role !== "" &&
+                        <>
                     <Grid item xs={1}>
                         <MenuItem onClick={() => {
-                            if(role === Roles.CLIENT){
+                            if (role === Roles.CLIENT) {
                                 navigate(`/client/${userId}`)
                             }
-                            if(role === Roles.TEACHER){
+                            if (role === Roles.TEACHER) {
                                 navigate(`/teacher/${userId}`)
                             }
                         }}>
                             Profil
                         </MenuItem>
                     </Grid>
-                    <Grid item xs={1}>
+
+                        <Grid item xs={1}>
                         <MenuItem onClick={() => {
-                            dispatch(logout())
-                            window.location.reload()
-                        }}>
-                            Wyloguj
+                        dispatch(logout())
+                        window.location.reload()
+                    }}>
+                        Wyloguj
                         </MenuItem>
-                    </Grid>
+                        </Grid>
+                        </>
+                    }
+                    {role === "" &&
+                        <>
                     <Grid item xs={1}>
                         <MenuItem onClick={() => navigate(AppRoutes.LOGIN)}>
                             Logowanie
@@ -52,6 +59,8 @@ export const NavigationBar = () => {
                             Rejestracja
                         </MenuItem>
                     </Grid>
+                        </>
+                    }
                 </Grid>
             </Toolbar>
         </AppBar>

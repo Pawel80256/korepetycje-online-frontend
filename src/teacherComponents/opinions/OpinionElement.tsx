@@ -26,7 +26,9 @@ export const OpinionElement: React.FC<OpinionElementProps> = (props) => {
             </Grid>
 
             <Grid item style={{width: "80%"}}>
-                {opinion.textValue}
+                <Typography style ={{overflowWrap:"break-word"}}>
+                    {opinion.textValue}
+                </Typography>
             </Grid>
 
         </Grid>

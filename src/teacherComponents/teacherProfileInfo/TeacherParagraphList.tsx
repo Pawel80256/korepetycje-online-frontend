@@ -22,21 +22,28 @@ export const TeacherParagraphList: React.FC<TeacherParagraphListProps> = (props)
     const params = useParams();
     const {teacherId} = params
     const role = localStorage.getItem("role")
+    const loggedUserId = localStorage.getItem("userDataId")
     return (
         <Grid container direction={"column"}>
             <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px", marginBottom: "90px"}}>
                 {role === Roles.TEACHER &&
                 <Grid container direction={"row"}>
-                    <Grid item>
-                        <AddIcon
-                            sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
-                            onClick={() => setIsOpenAddParagraphModal(true)}
-                        />
-                    </Grid>
+
+                        {
+                            (role === Roles.TEACHER && loggedUserId === teacherId) &&
+                            <Grid item>
+                            <AddIcon
+                                sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
+                                onClick={() => setIsOpenAddParagraphModal(true)}
+                            />
+                            </Grid>
+                        }
+
+
                 </Grid>}
                 {paragraphs.map(p =>
                     <>
-                        {role === Roles.TEACHER &&
+                        {(role === Roles.TEACHER && loggedUserId === teacherId) &&
                         <Grid container sx={{margin: "auto"}}>
                             <KeyboardArrowDownIcon
                                 style={{margin: "auto"}}
@@ -64,7 +71,7 @@ export const TeacherParagraphList: React.FC<TeacherParagraphListProps> = (props)
                         </Grid>
                         }
                         <TeacherParagraphElement paragraph={p} isTeacher={role === Roles.TEACHER}/>
-                        {role === Roles.TEACHER && <Divider style={{marginTop: "2%", marginBottom: "2%"}}/>}
+                        {(role === Roles.TEACHER && loggedUserId === teacherId) && <Divider style={{marginTop: "2%", marginBottom: "2%"}}/>}
                     </>
                 )}
             </Paper>

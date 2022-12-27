@@ -7,6 +7,8 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/locale/pl';
 import {BookVisitModal} from "../../clientComponents/visitBooking/BookVisitModal";
 import {AppointmentDto} from "../../dtos/models/AppointmentDto";
+import {Roles} from "../../app/enums/Roles";
+import {useSnackbar} from "notistack";
 
 type Props = {
     appointments: AppointmentDto[]
@@ -16,6 +18,9 @@ export const MyCalendar: React.FC<Props> = (props) => {
     const [isOpenBookVisitModal, setIsOpenBookVisitModal] = useState<boolean>(false)
     const [selectedAppointmentId, setSelectedAppointmentId] = useState<string>('')
     const {appointments} = props
+    const role = localStorage.getItem("role")
+    const { enqueueSnackbar } = useSnackbar();
+
     moment.locale('pl');
     const localizer = momentLocalizer(moment);
 
@@ -53,8 +58,14 @@ export const MyCalendar: React.FC<Props> = (props) => {
                     },
                 })}
                 onSelectEvent={(event) => {
-                    setSelectedAppointmentId(event.appointmentId)
-                    setIsOpenBookVisitModal(true)
+                    if(role === Roles.CLIENT){
+                        setSelectedAppointmentId(event.appointmentId)
+                        setIsOpenBookVisitModal(true)
+                    }
+                    if(role === ""){
+                        enqueueSnackbar("Rezerwacja terminu wymaga zalogowania, zaloguj się lub stwórz konto.", { variant: 'warning' });
+                    }
+
                     console.log(event)
                 }}
 
