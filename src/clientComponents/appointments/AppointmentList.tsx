@@ -1,5 +1,6 @@
 import {AppointmentDto} from "../../dtos/models/AppointmentDto";
 import {AppointmentElement} from "./appointmentElement";
+import {Grid} from "@mui/material";
 
 export interface AppointmentListProps {
     appointments: AppointmentDto[]
@@ -7,9 +8,9 @@ export interface AppointmentListProps {
 
 export const AppointmentList: React.FC<AppointmentListProps> = (props) => {
     const {appointments} = props
-    return <>
+    return <Grid container>
         {appointments.map(a => {
             return <AppointmentElement appointment={a}/>
         })}
-    </>
+    </Grid>
 }

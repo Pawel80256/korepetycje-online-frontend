@@ -7,8 +7,9 @@ export interface AppointmentElementProps {
 }
 
 export const AppointmentElement: React.FC<AppointmentElementProps> = (props) => {
+    const {appointment} = props
     return (
-        <Paper style={{margin: "auto", width: "90%", padding: "5px", backgroundColor: "#ECF8FF"}}>
+        <Paper style={{margin: "auto", width: "90%", padding: "5px", backgroundColor: "#ECF8FF",marginBottom:"2%"}}>
             <Grid item container direction={"row"}>
 
                 <Grid item style={{width: "20%", alignItems: "center", textAlign: "center"}}>
@@ -20,19 +21,21 @@ export const AppointmentElement: React.FC<AppointmentElementProps> = (props) => 
 
                 <Grid item style={{width: "30%"}}>
                     <Typography style={{fontSize: "150%"}}>
-                        Imie Nazwisko
+                        {appointment.teacher.userData.firstName} {appointment.teacher.userData.lastName}
                     </Typography>
                     <Typography style={{fontSize: "130%"}}>
-                        Miasto
+                        {appointment.teacher.city}
                     </Typography>
                 </Grid>
 
                 <Grid item style={{width: "50%", textAlign: "right"}}>
                     <Typography>
-                        20/09/2021 15:30
+                        {new Date(appointment.date).toLocaleDateString()}
+                        <br/>
+                        {new Date(appointment.date).getUTCHours()}:{new Date(appointment.date).getUTCMinutes()}
                     </Typography>
                     <Typography>
-                        Przedmiot
+                        {appointment.subject.subjectName}
                     </Typography>
                 </Grid>
             </Grid>
