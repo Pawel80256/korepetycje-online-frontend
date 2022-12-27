@@ -18,15 +18,20 @@ import {
 } from "../dtos/requests/Authentication";
 import {MenuItem} from "@mui/material";
 import {Roles} from "../app/enums/Roles";
+import {useSnackbar} from "notistack";
 
 
 const theme = createTheme();
 
-export const RegisterForm = () => {
+export const RegisterForm: React.FC = () => {
+    const { enqueueSnackbar } = useSnackbar();
 
     const formik = useFormik({
         initialValues: initialRegisterRequest,
         onSubmit: (values: RegisterRequest) => {
+            if(values.role === Roles.TEACHER.toString() && values.city === ''){
+                enqueueSnackbar("Podaj nazwę miasta", { variant: 'error' });
+            }
             console.log(values)
         },
         validationSchema: registerRequestValidationSchema

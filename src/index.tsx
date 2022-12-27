@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './IndexStyle.css'
 import {BrowserRouter} from "react-router-dom";
+import {SnackbarProvider} from "notistack";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -15,7 +16,9 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             <BrowserRouter>
-            <App/>
+                <SnackbarProvider maxSnack={3}>
+                    <App/>
+                </SnackbarProvider>
             </BrowserRouter>
         </Provider>
     </React.StrictMode>
