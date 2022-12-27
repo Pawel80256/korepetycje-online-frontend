@@ -19,6 +19,7 @@ import {
 import {MenuItem} from "@mui/material";
 import {Roles} from "../app/enums/Roles";
 import {useSnackbar} from "notistack";
+import {register} from "../app/services/AuthService";
 
 
 const theme = createTheme();
@@ -33,6 +34,7 @@ export const RegisterForm: React.FC = () => {
                 enqueueSnackbar("Podaj nazwę miasta", { variant: 'error' });
             }else{
                 console.log(values)
+                register(values)
             }
         },
         validationSchema: registerRequestValidationSchema
