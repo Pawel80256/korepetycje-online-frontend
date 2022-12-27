@@ -9,22 +9,23 @@ import {useState} from "react";
 import {ParagraphInputModal} from "./ParagraphInputModal";
 import {changeParagraphOrder, deleteParagraph} from "../../app/services/TeacherService";
 import {useParams} from "react-router-dom";
+import {Roles} from "../../app/enums/Roles";
 
 export interface TeacherParagraphListProps {
     paragraphs: ParagraphDto[]
-    isTeacher: boolean
 }
 
 export const TeacherParagraphList: React.FC<TeacherParagraphListProps> = (props) => {
-    const {paragraphs, isTeacher} = props
+    const {paragraphs} = props
     const [isOpenAddParagraphModal, setIsOpenAddParagraphModal] = useState<boolean>(false)
     //todo: take id from localstorage
     const params = useParams();
     const {teacherId} = params
+    const role = localStorage.getItem("role")
     return (
         <Grid container direction={"column"}>
             <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px", marginBottom: "90px"}}>
-                {isTeacher &&
+                {role === Roles.TEACHER &&
                 <Grid container direction={"row"}>
                     <Grid item>
                         <AddIcon
@@ -35,7 +36,7 @@ export const TeacherParagraphList: React.FC<TeacherParagraphListProps> = (props)
                 </Grid>}
                 {paragraphs.map(p =>
                     <>
-                        {isTeacher &&
+                        {role === Roles.TEACHER &&
                         <Grid container sx={{margin: "auto"}}>
                             <KeyboardArrowDownIcon
                                 style={{margin: "auto"}}
@@ -62,8 +63,8 @@ export const TeacherParagraphList: React.FC<TeacherParagraphListProps> = (props)
                             />
                         </Grid>
                         }
-                        <TeacherParagraphElement paragraph={p} isTeacher={isTeacher}/>
-                        {isTeacher && <Divider style={{marginTop: "2%", marginBottom: "2%"}}/>}
+                        <TeacherParagraphElement paragraph={p} isTeacher={role === Roles.TEACHER}/>
+                        {role === Roles.TEACHER && <Divider style={{marginTop: "2%", marginBottom: "2%"}}/>}
                     </>
                 )}
             </Paper>

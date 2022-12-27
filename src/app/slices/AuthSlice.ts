@@ -46,8 +46,10 @@ export const login = createAsyncThunk(
         try {
             const jwt = await axios.post('http://localhost:8080/api/authenticate', request);
             const data = parseJwt(jwt.data)
+            console.log(data)
             localStorage.setItem("jwt", JSON.stringify(jwt.data));
             localStorage.setItem("userDataId", data.sub)
+            localStorage.setItem("role",data.roles[0])
             return jwt;
         } catch (error) {
             return rejectWithValue(error)
@@ -56,7 +58,9 @@ export const login = createAsyncThunk(
 )
 
 export const logout = createAsyncThunk("auth/logout", async () => {
-    console.log("logout")
+    localStorage.setItem("jwt", "");
+    localStorage.setItem("userDataId", "")
+    localStorage.setItem("role","")
 });
 
 const AuthSlice = createSlice({
@@ -66,6 +70,9 @@ const AuthSlice = createSlice({
     extraReducers: (builder => {
         builder.addCase(login.fulfilled, (state, action) => {
             state.token = action.payload.data
+        })
+        builder.addCase(logout.fulfilled, (state,action)=>{
+            state = initialState
         })
     })
 })

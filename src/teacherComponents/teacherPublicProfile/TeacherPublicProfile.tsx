@@ -16,6 +16,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import {EditChoiceModal} from "../editSubjects/EditChoiceModal";
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
+import {Roles} from "../../app/enums/Roles";
 
 export const TeacherPublicProfile = () => {
     const params = useParams();
@@ -27,6 +28,7 @@ export const TeacherPublicProfile = () => {
     const [city, setCity] = useState<string>(teacher.city)
     //todo:determine role from redux or smth
     const isTeacher: boolean = true
+    const role = localStorage.getItem("role")
 
     useEffect(() => {
         getTeacherById(teacherId!).then(response => {
@@ -58,11 +60,12 @@ export const TeacherPublicProfile = () => {
                             <Grid item>
                                 <Typography gutterBottom variant="subtitle1" component="div">
                                     {`Korepetytor przedmiotów: ${teacher?.subjects.map(s => s.subjectName).join(", ")}`}
+                                    {role === Roles.TEACHER &&
                                     <EditIcon
                                         fontSize={"small"}
                                         onClick={() => setIsOpenEditChoiceModal(true)}
                                         sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
-                                    />
+                                    />}
                                 </Typography>
                             </Grid>
                             <Grid item>
@@ -94,11 +97,12 @@ export const TeacherPublicProfile = () => {
                                     :
                                     <Typography gutterBottom variant="subtitle1" component="div" color="text.secondary">
                                         {teacher?.city}
+                                        {role === Roles.TEACHER &&
                                         <EditIcon
                                             sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
                                             fontSize={"small"}
                                             onClick={() => setIsEditingCity(true)}
-                                        />
+                                        />}
                                     </Typography>
                                 }
                             </Grid>
@@ -134,14 +138,14 @@ export const TeacherPublicProfile = () => {
             </Grid>
 
             <Grid item>
-                <TeacherParagraphList paragraphs={sortParagraphsByOrder(teacher.profileInfo)} isTeacher={isTeacher}/>
+                <TeacherParagraphList paragraphs={sortParagraphsByOrder(teacher.profileInfo)}/>
             </Grid>
 
             <Grid item sx={{display: "flex"}}>
                 <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
 
                     <MyCalendar appointments={teacher.appointments.filter(a => a.subject === null)}/>
-                    {isTeacher &&
+                    {role === Roles.TEACHER &&
                     <Button
                         variant={"contained"}
                         fullWidth

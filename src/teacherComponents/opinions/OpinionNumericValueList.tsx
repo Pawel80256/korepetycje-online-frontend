@@ -4,6 +4,7 @@ import {Button, Grid, Typography} from '@mui/material';
 import StarRatings from "react-star-ratings";
 import {getAverageRating} from "../../app/utils/utils";
 import {CreateOpinionModal} from "./CreateOpinionModal";
+import {Roles} from "../../app/enums/Roles";
 
 interface Props {
     opinions: OpinionDto[];
@@ -17,7 +18,7 @@ export const OpinionNumericValueList: React.FC<Props> = ({opinions}) => {
     );
 
     const opinionPercents = opinionCounts.map(count => (count / opinions.length) * 100);
-
+    const role = localStorage.getItem("role")
     return (
         <Grid container>
             <Grid container item>
@@ -28,13 +29,14 @@ export const OpinionNumericValueList: React.FC<Props> = ({opinions}) => {
                                  starSpacing={"1px"}/>
                 </Grid>
                 <Typography fontSize={"30px"}>&nbsp;{` ${getAverageRating(opinions)} / 5`}</Typography>
+                {role === Roles.CLIENT &&
                 <Button
                     variant="contained"
                     style={{marginLeft: "40%"}}
                     onClick={() => setIsOpenCreateOpinionModal(true)}
                 >
                     Dodaj opinię
-                </Button>
+                </Button>}
             </Grid>
 
 

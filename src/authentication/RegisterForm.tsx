@@ -29,10 +29,11 @@ export const RegisterForm: React.FC = () => {
     const formik = useFormik({
         initialValues: initialRegisterRequest,
         onSubmit: (values: RegisterRequest) => {
-            if(values.role === Roles.TEACHER.toString() && values.city === ''){
+            if(values.role === Roles.TEACHER.toString() && values.city.trim() === ''){
                 enqueueSnackbar("Podaj nazwę miasta", { variant: 'error' });
+            }else{
+                console.log(values)
             }
-            console.log(values)
         },
         validationSchema: registerRequestValidationSchema
     });
@@ -81,7 +82,6 @@ export const RegisterForm: React.FC = () => {
                                             onBlur={formik.handleBlur}
                                             autoComplete="given-name"
                                             label="Imię"
-                                            required
                                             fullWidth
                                             autoFocus
                                         />
@@ -97,7 +97,6 @@ export const RegisterForm: React.FC = () => {
                                         value={formik.values.lastName}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        required
                                         fullWidth
                                         label="Nazwisko"
                                         autoComplete="family-name"
@@ -113,7 +112,6 @@ export const RegisterForm: React.FC = () => {
                                         value={formik.values.emailAddress}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        required
                                         fullWidth
                                         label="Adres email"
                                         autoComplete="email"
@@ -129,7 +127,6 @@ export const RegisterForm: React.FC = () => {
                                         value={formik.values.password}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        required
                                         fullWidth
                                         label="Hasło"
                                         type="password"

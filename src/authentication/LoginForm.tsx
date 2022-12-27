@@ -21,7 +21,9 @@ export const LoginForm = () => {
     const formik = useFormik({
         initialValues: initialLoginRequest,
         onSubmit: (values: LoginRequest) => {
-            dispatch(login(values))
+            console.log(values)
+            dispatch(login(values)).then(()=>window.location.reload())
+
         },
         validationSchema: loginRequestValidationSchema
     });
