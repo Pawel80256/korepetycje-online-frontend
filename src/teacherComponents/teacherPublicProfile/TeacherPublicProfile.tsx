@@ -17,6 +17,7 @@ import {EditChoiceModal} from "../editSubjects/EditChoiceModal";
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import {Roles} from "../../app/enums/Roles";
+import {useSnackbar} from "notistack";
 
 export const TeacherPublicProfile = () => {
     const params = useParams();
@@ -26,10 +27,9 @@ export const TeacherPublicProfile = () => {
     const [isOpenEditChoiceModal, setIsOpenEditChoiceModal] = useState<boolean>(false)
     const [isEditingCity, setIsEditingCity] = useState<boolean>(false)
     const [city, setCity] = useState<string>(teacher.city)
-    //todo:determine role from redux or smth
-    const isTeacher: boolean = true
     const role = localStorage.getItem("role")
     const loggedUserId = localStorage.getItem("userDataId")
+    const {enqueueSnackbar} = useSnackbar()
 
     useEffect(() => {
         getTeacherById(teacherId!).then(response => {
@@ -83,8 +83,11 @@ export const TeacherPublicProfile = () => {
                                                 color: "blue"
                                             }}
                                             onClick={() => {
-                                                updateCity(teacherId!, city)
-                                                window.location.reload()
+                                                if(city.trim().length === 0){
+                                                    enqueueSnackbar("Wprowadź nazwę miasta",{variant:'error'})
+                                                }else {
+                                                    updateCity(teacherId!, city).then(()=>window.location.reload())
+                                                }
                                             }}
                                         />
                                         <ClearIcon
@@ -144,8 +147,8 @@ export const TeacherPublicProfile = () => {
 
             <Grid item sx={{display: "flex"}}>
                 <Paper elevation={2} style={{margin: "auto", width: "60%", padding: "5px"}}>
-
-                    <MyCalendar appointments={teacher.appointments.filter(a => a.subject === null)}/>
+                    {/*teacher.appointments.filter(a => a.subject === null)*/}
+                    <MyCalendar appointments={teacher.appointments}/>
                     {(role === Roles.TEACHER && loggedUserId === teacherId) &&
                     <Button
                         variant={"contained"}

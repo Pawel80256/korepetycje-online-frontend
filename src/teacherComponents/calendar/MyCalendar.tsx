@@ -27,7 +27,8 @@ export const MyCalendar: React.FC<Props> = (props) => {
     const events = appointments.map((appointment) => ({
         start: new Date(appointment.date),
         end: new Date(new Date(appointment.date).getTime() + 30 * 60 * 1000),
-        title: 'Wolny termin',
+        title: 'Termin',
+        subject:appointment.subject,
         appointmentId: appointment.id
     }));
 
@@ -49,18 +50,35 @@ export const MyCalendar: React.FC<Props> = (props) => {
                     day: 'Dzień',
                     agenda: 'Wszystkie terminy'
                 }}
-                eventPropGetter={(event: any) => ({
+                eventPropGetter={(event: any) => (
+                    event.subject === null ?
+                    {
                     style: {
-                        backgroundColor: '#00bcd4',
+                        backgroundColor: '#1976d2',
                         color: 'white',
                         borderRadius: '5px',
                         border: 'none',
                     },
-                })}
+                } :
+                        {
+                            style: {
+                                backgroundColor: '#E13C3C',
+                                color: 'white',
+                                borderRadius: '5px',
+                                border: 'none',
+                            },
+                        }
+                )}
                 onSelectEvent={(event) => {
+
                     if(role === Roles.CLIENT){
-                        setSelectedAppointmentId(event.appointmentId)
-                        setIsOpenBookVisitModal(true)
+                        if(event.subject !== null){
+                            enqueueSnackbar("Ten termin jest już zajęty",{variant:'warning'})
+                        }
+                        else{
+                            setSelectedAppointmentId(event.appointmentId)
+                            setIsOpenBookVisitModal(true)
+                        }
                     }
                     if(role === ""){
                         enqueueSnackbar("Rezerwacja terminu wymaga zalogowania, zaloguj się lub stwórz konto.", { variant: 'warning' });

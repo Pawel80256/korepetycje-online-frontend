@@ -5,6 +5,7 @@ import {SubjectDto} from "../../dtos/models/Subject";
 import {useState} from "react";
 import {SubjectToEditList} from "./SubjectToEditList";
 import {addSubject} from "../../app/services/SubjectService";
+import {useSnackbar} from "notistack";
 
 export interface EditChoiceModalProps {
     open: boolean,
@@ -35,6 +36,7 @@ export const EditChoiceModal: React.FC<EditChoiceModalProps> = (props) => {
     const [isAdding, setIsAdding] = useState<boolean>(false)
     const [isDeleting, setIsDeleting] = useState<boolean>(false)
     const [subjectName, setSubjectName] = useState<string>('')
+    const {enqueueSnackbar} = useSnackbar()
 
     const toggleDeleting = () => {
         setIsAdding(false)
@@ -86,8 +88,12 @@ export const EditChoiceModal: React.FC<EditChoiceModalProps> = (props) => {
                             onChange={(event => setSubjectName(event.target.value))}
                         />
                         <Button variant={"contained"} onClick={() => {
-                            addSubject(teacherId!, subjectName)
-                            window.location.reload()
+                            if(subjectName.trim().length<2 || subjectName.length>40){
+                                enqueueSnackbar("Długośc tematu nauczania musi wynosić od 2 do 40 znaków",{variant:'error'})
+                            }
+                            else {
+                                addSubject(teacherId!, subjectName).then(()=>window.location.reload())
+                            }
                         }}>Dodaj przedmiot</Button>
                     </Grid>
                     }
