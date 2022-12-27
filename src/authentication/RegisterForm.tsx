@@ -9,11 +9,15 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useFormik} from "formik";
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
 import {
     initialRegisterRequest,
     RegisterRequest,
     registerRequestValidationSchema
 } from "../dtos/requests/Authentication";
+import {MenuItem} from "@mui/material";
+import {Roles} from "../app/enums/Roles";
 
 
 const theme = createTheme();
@@ -48,6 +52,20 @@ export const RegisterForm = () => {
                     <Box sx={{mt: 3}}>
                         <form onSubmit={formik.handleSubmit}>
                             <Grid container spacing={2}>
+                                <Grid item xs ={12}>
+                                    <Select
+                                        fullWidth
+                                        id="role"
+                                        name="role"
+                                        value={formik.values.role}
+                                        onChange={formik.handleChange}
+                                        onBlur = {formik.handleBlur}
+                                        autoFocus
+                                    >
+                                        <MenuItem value={Roles.CLIENT.toString()}>Uczeń</MenuItem>
+                                        <MenuItem value={Roles.TEACHER.toString()}>Nauczyciel</MenuItem>
+                                    </Select>
+                                </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <>
                                         <TextField
@@ -116,6 +134,23 @@ export const RegisterForm = () => {
                                         <div style={{color: "red"}}>{formik.errors.password}</div>
                                     )}
                                 </Grid>
+                                {formik.values.role === Roles.TEACHER.toString() &&
+                                <Grid item xs={12}>
+                                    <TextField
+                                        id="city"
+                                        name="city"
+                                        value={formik.values.city}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        fullWidth
+                                        label="Miasto"
+                                    />
+                                    {formik.touched.city && formik.errors.city && typeof formik.errors.city === "string" && (
+                                        <div style={{color: "red"}}>{formik.errors.city}</div>
+                                    )}
+                                </Grid>
+                                }
+
                             </Grid>
                             <Button
                                 type="submit"
