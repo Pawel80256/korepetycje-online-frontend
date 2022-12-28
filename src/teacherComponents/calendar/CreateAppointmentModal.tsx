@@ -1,5 +1,5 @@
 import Backdrop from "@mui/material/Backdrop";
-import {Box, Button, Fade, Grid, Modal, TextField} from "@mui/material";
+import {Box, breadcrumbsClasses, Button, Fade, Grid, Modal, TextField} from "@mui/material";
 import {useState} from "react";
 import dayjs, {Dayjs} from 'dayjs';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
@@ -7,10 +7,13 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
 import {createAppointment} from "../../app/services/AppointmentService";
 import {useParams} from "react-router-dom";
+import {AppointmentDto} from "../../dtos/models/AppointmentDto";
+import {useSnackbar} from "notistack";
 
 export interface CreateAppointmentModalProps {
     open: boolean,
     setOpen: (value: boolean) => void
+    currentAppointments: AppointmentDto[]
 }
 
 const style = {
@@ -29,7 +32,8 @@ const style = {
 };
 
 export const CreateAppointmentModal: React.FC<CreateAppointmentModalProps> = (props) => {
-    const {open, setOpen} = props
+    const {open, setOpen, currentAppointments} = props
+    const {enqueueSnackbar} = useSnackbar()
     const handleClose = () => setOpen(false);
     const params = useParams();
     const {teacherId} = params
@@ -42,9 +46,24 @@ export const CreateAppointmentModal: React.FC<CreateAppointmentModalProps> = (pr
     };
 
     const handleSubmit = (teacherId: string, date: Dayjs) => {
-        createAppointment(teacherId, date)
-        window.location.reload()
+        let isValid = true
+        for (const appointment of currentAppointments) {
+            if(date.isSame(appointment.date,'day') && date.isSame(appointment.date,'month')){
+                const difference = date.diff(appointment.date, 'minutes');
+                if (Math.abs(difference) < 60) {
+                    enqueueSnackbar('Niepoprawny odstęp między lekcjami', { variant: 'error' });
+                    isValid = false;
+                    break
+                }
+            }
+
+        }
+        if(isValid){
+            createAppointment(teacherId, date)
+            window.location.reload()
+        }
     }
+
 
     return (
         <Modal

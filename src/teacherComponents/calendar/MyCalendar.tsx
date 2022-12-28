@@ -26,7 +26,7 @@ export const MyCalendar: React.FC<Props> = (props) => {
 
     const events = appointments.map((appointment) => ({
         start: new Date(appointment.date),
-        end: new Date(new Date(appointment.date).getTime() + 30 * 60 * 1000),
+        end: new Date(new Date(appointment.date).getTime() + 60 * 60 * 1000),
         title: 'Termin',
         subject:appointment.subject,
         appointmentId: appointment.id
