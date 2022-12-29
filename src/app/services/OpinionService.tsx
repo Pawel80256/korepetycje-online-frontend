@@ -14,3 +14,12 @@ export const createOpinion = async (numericValue: number, textValue: string, cli
         console.log(error)
     }
 }
+
+export const getAllOpinions = async () => {
+    try{
+        const response = await axios.get('http://localhost:8080/api/opinions')
+        return response.data
+    }catch (error){
+        console.log(error)
+    }
+}

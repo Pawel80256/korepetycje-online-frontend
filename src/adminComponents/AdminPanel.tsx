@@ -5,11 +5,11 @@ import {OpinionsTable} from "./OpinionsTable";
 export const AdminPanel = () =>{
     return (
         <>
-            <Grid container>
-                <Grid item style={{width:"10%"}}>
+            <Grid container direction={"column"}>
+                <Grid item >
                     <AdminPanelMenu/>
                 </Grid>
-                <Grid item style={{width:"90%"}}>
+                <Grid item >
                     <OpinionsTable/>
                 </Grid>
             </Grid>

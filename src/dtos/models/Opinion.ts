@@ -1,4 +1,5 @@
 import {ClientDto, initialClientDto} from "./Client";
+import {initialTeacherDto, TeacherDto} from "./Teacher";
 
 export interface OpinionDto {
     id: string,
@@ -6,6 +7,7 @@ export interface OpinionDto {
     numericValue: number,
     createdAt: Date,
     client: ClientDto
+    teacher:TeacherDto
 }
 
 export const initialOpinionDto: OpinionDto = {
@@ -13,5 +15,6 @@ export const initialOpinionDto: OpinionDto = {
     textValue: '',
     numericValue: 0,
     createdAt: new Date(),
-    client: initialClientDto
+    client: initialClientDto,
+    teacher:initialTeacherDto
 }
