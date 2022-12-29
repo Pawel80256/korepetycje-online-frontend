@@ -9,6 +9,7 @@ import {TeacherPublicProfile} from "./teacherComponents/teacherPublicProfile/Tea
 import {RegisterForm} from "./authentication/RegisterForm";
 import {ClientProfile} from "./clientComponents/clientProfile/ClientProfile";
 import {Roles} from "./app/enums/Roles";
+import {AdminPanel} from "./adminComponents/AdminPanel";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                 {role === Roles.CLIENT &&
                 <Route path={AppRoutes.CLIENT_PROFILE} element={<ClientProfile/>}/>
                 }
+                <Route path={AppRoutes.ADMIN_PANEL} element={<AdminPanel/>}/>
 
             </Routes>
         </>
