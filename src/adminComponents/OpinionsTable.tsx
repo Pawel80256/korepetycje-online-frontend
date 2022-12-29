@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import {useEffect, useState} from "react";
 import {OpinionDto} from "../dtos/models/Opinion";
 import {getAllOpinions} from "../app/services/OpinionService";
+import {TextField} from "@mui/material";
 
 
 const defaultFilterValues = {
@@ -48,28 +49,22 @@ export const OpinionsTable = () => {
                 <TableHead>
                     <TableRow>
                         <TableCell>
-                            ID opinii
-                            <input type="text" name="id" value={filters.id} onChange={handleFilterChange} />
+                            <TextField label={"ID opinii"} type="text" name="id" value={filters.id} onChange={handleFilterChange} />
                         </TableCell>
                         <TableCell >
-                            ID nauczyciela
-                            <input type="text" name="teacherId" value={filters.teacherId} onChange={handleFilterChange} />
+                            <TextField label={"ID nauczyciela"} type="text" name="teacherId" value={filters.teacherId} onChange={handleFilterChange} />
                         </TableCell>
                         <TableCell >
-                            ID ucznia
-                            <input type="text" name="clientId" value={filters.clientId} onChange={handleFilterChange} />
+                            <TextField label={"ID ucznia"} type="text" name="clientId" value={filters.clientId} onChange={handleFilterChange} />
                         </TableCell>
                         <TableCell >
-                            Wartość numeryczna
-                            <input type="text" name="numericValue" value={filters.numericValue} onChange={handleFilterChange} />
+                            <TextField label={"Wartość numeryczna"} type="text" name="numericValue" value={filters.numericValue} onChange={handleFilterChange} />
                         </TableCell>
                         <TableCell >
-                            Data wystawienia
-                            <input type="text" name="createdAt" value={filters.createdAt} onChange={handleFilterChange} />
+                            <TextField label = {"Data wystawienia"} type="text" name="createdAt" value={filters.createdAt} onChange={handleFilterChange} />
                         </TableCell>
                         <TableCell>
-                            Tekst
-                            <input type="text" name="textValue" value={filters.textValue} onChange={handleFilterChange} />
+                            <TextField label={"Tekst"} type="text" name="textValue" value={filters.textValue} onChange={handleFilterChange} />
                         </TableCell>
                     </TableRow>
                 </TableHead>
