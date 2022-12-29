@@ -10,27 +10,71 @@ import {useEffect, useState} from "react";
 import {OpinionDto} from "../dtos/models/Opinion";
 import {getAllOpinions} from "../app/services/OpinionService";
 
+
+const defaultFilterValues = {
+    id: '',
+    teacherId: '',
+    clientId: '',
+    numericValue: '',
+    createdAt: '',
+    textValue: '',
+}
+
 export const OpinionsTable = () => {
     const [opinions,setOpinions] = useState<OpinionDto[]>([])
+    const [filters, setFilters] = useState(defaultFilterValues)
 
     useEffect(()=>{
         getAllOpinions().then(response => setOpinions(response))
     })
+
+
+    const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target
+        setFilters({ ...filters, [name]: value })
+    }
+
+
+    const filterPredicate = (opinion: OpinionDto) =>
+        Object.entries(filters).every(([key, filterValue]) => {
+            // @ts-ignore
+            const cellValue = key === 'createdAt' ? new Date(opinion[key]).toLocaleDateString() : opinion[key]
+            return String(cellValue).toLowerCase().includes(filterValue.toLowerCase())
+        })
+
     return (
         <TableContainer component={Paper} >
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>ID opinii</TableCell>
-                        <TableCell >ID nauczyciela</TableCell>
-                        <TableCell >ID ucznia</TableCell>
-                        <TableCell >Wartość numeryczna</TableCell>
-                        <TableCell >Data wystawienia</TableCell>
-                        <TableCell>Tekst</TableCell>
+                        <TableCell>
+                            ID opinii
+                            <input type="text" name="id" value={filters.id} onChange={handleFilterChange} />
+                        </TableCell>
+                        <TableCell >
+                            ID nauczyciela
+                            <input type="text" name="teacherId" value={filters.teacherId} onChange={handleFilterChange} />
+                        </TableCell>
+                        <TableCell >
+                            ID ucznia
+                            <input type="text" name="clientId" value={filters.clientId} onChange={handleFilterChange} />
+                        </TableCell>
+                        <TableCell >
+                            Wartość numeryczna
+                            <input type="text" name="numericValue" value={filters.numericValue} onChange={handleFilterChange} />
+                        </TableCell>
+                        <TableCell >
+                            Data wystawienia
+                            <input type="text" name="createdAt" value={filters.createdAt} onChange={handleFilterChange} />
+                        </TableCell>
+                        <TableCell>
+                            Tekst
+                            <input type="text" name="textValue" value={filters.textValue} onChange={handleFilterChange} />
+                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {opinions.map((opinion) => (
+                    {opinions.filter(filterPredicate).map((opinion) => (
                         <TableRow
                             key={opinion.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
