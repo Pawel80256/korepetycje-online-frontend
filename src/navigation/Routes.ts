@@ -5,5 +5,5 @@ export enum AppRoutes {
     TEACHER_PUBLIC_PROFILE = "/teacher/:teacherId",
     CLIENT_PROFILE = "/client/:clientId",
     SEARCH = "/search",
-    ADMIN_PANEL = "/adminPanel"
+    ADMIN_PANEL = "/adminPanel/:tab"
 }
