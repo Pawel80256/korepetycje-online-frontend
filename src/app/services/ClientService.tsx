@@ -16,3 +16,12 @@ export const getClientById = async (clientId: string) => {
         console.log(error)
     }
 }
+
+export const getAllClients = async () =>{
+    try{
+        const response = await axios.get('http://localhost:8080/api/clients')
+        return response.data
+    }catch (error){
+        console.log(error)
+    }
+}

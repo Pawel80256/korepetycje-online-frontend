@@ -15,7 +15,7 @@ export const AdminPanelMenu = () =>{
                                 navigate('/adminPanel/teachers')
                                 break
                             case "Uczniowie":
-                                navigate('/adminPanel/uczniowie')
+                                navigate('/adminPanel/clients')
                                 break
                             case "Spotkania":
                                 navigate('/adminPanel/appointments')

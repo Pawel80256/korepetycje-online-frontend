@@ -34,32 +34,25 @@ export const TeachersTable = () => {
 
     const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target
-        console.log(name,value)
         setFilters({ ...filters, [name]: value })
     }
 
     function filterTeachers(teachers: TeacherDto[], filters: { [key: string]: string }): TeacherDto[] {
         return teachers.filter((teacher) => {
-            // Check if every filter value is included in the corresponding field of the teacher
             return Object.entries(filters).every(([key, filterValue]) => {
-                // Get the value of the field in the teacher
                 // @ts-ignore
                 let fieldValue: any = teacher[key];
-                // If the field is in the userData object, get the value from there instead
                 if (key === 'firstName' || key === 'lastName' || key === 'emailAddress') {
                     fieldValue = teacher.userData[key];
                 }
-                // If the field is 'subjects', check if at least one of the subjects in the teacher matches the filter value
                 if (key === 'subjects') {
                     return teacher.subjects.some((subject) => subject.subjectName.toLowerCase().includes(filterValue.toLowerCase()));
                 }
-                // If the field is 'averageRating', check if the average rating of the teacher's opinions is greater than or equal to the filter value
                 // if (key === 'averageRating') {
                 //     const totalRating = teacher.opinions.reduce((acc, opinion) => acc + opinion.numericValue, 0);
                 //     const averageRating = totalRating / teacher.opinions.length;
                 //     return averageRating >= Number(filterValue);
                 // }
-                // For all other fields, check if the field value in the teacher includes the filter value
                 return String(fieldValue).toLowerCase().includes(filterValue.toLowerCase());
             });
         });

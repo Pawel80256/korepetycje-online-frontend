@@ -3,6 +3,7 @@ import {Grid} from "@mui/material";
 import {OpinionsTable} from "./OpinionsTable";
 import {useParams} from "react-router-dom";
 import {TeachersTable} from "./TeachersTable";
+import {ClientsTable} from "./ClientsTable";
 
 export const AdminPanel = () =>{
     const params = useParams();
@@ -23,7 +24,11 @@ export const AdminPanel = () =>{
                     <TeachersTable/>
                 </Grid>
                 }
-
+                {tab === "clients" &&
+                <Grid item>
+                    <ClientsTable/>
+                </Grid>
+                }
             </Grid>
         </>
     )
