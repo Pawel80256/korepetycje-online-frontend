@@ -47,9 +47,11 @@ export const CreateAppointmentModal: React.FC<CreateAppointmentModalProps> = (pr
 
     const handleSubmit = (teacherId: string, date: Dayjs) => {
         let isValid = true
+        console.log(date)
         for (const appointment of currentAppointments) {
             if(date.isSame(appointment.date,'day') && date.isSame(appointment.date,'month')){
                 const difference = date.diff(appointment.date, 'minutes');
+                console.log(difference)
                 if (Math.abs(difference) < 60) {
                     enqueueSnackbar('Niepoprawny odstęp między lekcjami', { variant: 'error' });
                     isValid = false;
@@ -59,8 +61,7 @@ export const CreateAppointmentModal: React.FC<CreateAppointmentModalProps> = (pr
 
         }
         if(isValid){
-            createAppointment(teacherId, date)
-            window.location.reload()
+            createAppointment(teacherId, date).then(()=>window.location.reload())
         }
     }
 

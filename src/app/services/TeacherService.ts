@@ -71,3 +71,12 @@ export const updateCity = async (teacherId: string, city: string) => {
         console.log(error)
     }
 }
+
+export const getAllTeachers = async () =>{
+    try {
+        const response = await axios.get('http://localhost:8080/api/teachers')
+        return response.data
+    }catch (error){
+        console.log(error)
+    }
+}

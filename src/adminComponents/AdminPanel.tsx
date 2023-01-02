@@ -2,6 +2,7 @@ import {AdminPanelMenu} from "./AdminPanelMenu";
 import {Grid} from "@mui/material";
 import {OpinionsTable} from "./OpinionsTable";
 import {useParams} from "react-router-dom";
+import {TeachersTable} from "./TeachersTable";
 
 export const AdminPanel = () =>{
     const params = useParams();
@@ -15,6 +16,11 @@ export const AdminPanel = () =>{
                 {tab === "opinions" &&
                 <Grid item>
                     <OpinionsTable/>
+                </Grid>
+                }
+                {tab === "teachers" &&
+                <Grid item>
+                    <TeachersTable/>
                 </Grid>
                 }
 
