@@ -1,10 +1,15 @@
 import Backdrop from "@mui/material/Backdrop";
 import {Box, Button, Fade, Grid, Modal, Typography} from "@mui/material";
 import {AppointmentDto} from "../../dtos/models/AppointmentDto";
+import {SubjectDto} from "../../dtos/models/Subject";
+import {deleteAppointment} from "../../app/services/AppointmentService";
+import {useSnackbar} from "notistack";
 
 export interface CreateAppointmentModalProps {
     open: boolean,
-    setOpen: (value: boolean) => void
+    setOpen: (value: boolean) => void,
+    appointmentId:string,
+    selectedSubject:SubjectDto
 }
 
 const style = {
@@ -23,8 +28,9 @@ const style = {
 };
 
 export const DeleteAppointmentModal:React.FC<CreateAppointmentModalProps> = (props) =>{
-    const {open,setOpen} = props
+    const {open,setOpen,selectedSubject,appointmentId} = props
     const handleClose = () => setOpen(false);
+    const {enqueueSnackbar} = useSnackbar()
 
     return (
         <Modal
@@ -46,10 +52,16 @@ export const DeleteAppointmentModal:React.FC<CreateAppointmentModalProps> = (pro
                                 Czy chcesz usunąć termin z kalendarza?
                             </Typography>
                             <Grid item style={{textAlign:"center"}}>
-                                <Button variant={"contained"}>
+                                <Button variant={"contained"} onClick={()=> {
+                                    if(selectedSubject === null){
+                                        deleteAppointment(appointmentId).then(()=>window.location.reload())
+                                    }else{
+                                        enqueueSnackbar("Ta wizyta jest już zarezerwowana, w celu jej odwołania skontaktuj się z administratorem",{variant:"error"})
+                                    }
+                                }}>
                                     Potwierdź
                                 </Button>
-                                <Button variant={"contained"} color={"error"}>
+                                <Button variant={"contained"} color={"error"} onClick={handleClose}>
                                     Anuluj
                                 </Button>
                             </Grid>

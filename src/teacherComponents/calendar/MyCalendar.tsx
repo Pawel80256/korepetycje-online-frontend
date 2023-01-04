@@ -99,7 +99,7 @@ export const MyCalendar: React.FC<Props> = (props) => {
             />
             <BookVisitModal open={isOpenBookVisitModal} setOpen={setIsOpenBookVisitModal}
                             appointmentId={selectedAppointmentId}/>
-            <DeleteAppointmentModal open={isOpenDeleteAppointmentModal} setOpen={setIsOpenDeleteAppointmentModal}/>
+            <DeleteAppointmentModal open={isOpenDeleteAppointmentModal} setOpen={setIsOpenDeleteAppointmentModal} appointmentId={selectedAppointmentId} selectedSubject={selectedSubject}/>
         </>
     );
 };

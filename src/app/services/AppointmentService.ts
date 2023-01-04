@@ -22,3 +22,11 @@ export const bookAppointment = async (appointmentId: string, clientId: string, s
         console.log(error)
     }
 }
+
+export const deleteAppointment = async (appointmentId:string) =>{
+    try{
+        await axios.delete(`http://localhost:8080/api/appointment/${appointmentId}`)
+    }catch (error){
+        console.log(error)
+    }
+}
