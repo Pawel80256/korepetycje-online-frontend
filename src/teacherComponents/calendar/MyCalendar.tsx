@@ -6,9 +6,11 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 // Import the default time formats provided by the library
 import 'moment/locale/pl';
 import {BookVisitModal} from "../../clientComponents/visitBooking/BookVisitModal";
-import {AppointmentDto} from "../../dtos/models/AppointmentDto";
+import {AppointmentDto, initialAppointmentDto} from "../../dtos/models/AppointmentDto";
 import {Roles} from "../../app/enums/Roles";
 import {useSnackbar} from "notistack";
+import {DeleteAppointmentModal} from "./DeleteAppointmentModal";
+import {initialSubjectDto, SubjectDto} from "../../dtos/models/Subject";
 
 type Props = {
     appointments: AppointmentDto[]
@@ -16,7 +18,9 @@ type Props = {
 
 export const MyCalendar: React.FC<Props> = (props) => {
     const [isOpenBookVisitModal, setIsOpenBookVisitModal] = useState<boolean>(false)
+    const [isOpenDeleteAppointmentModal, setIsOpenDeleteAppointmentModal] = useState<boolean>(false)
     const [selectedAppointmentId, setSelectedAppointmentId] = useState<string>('')
+    const [selectedSubject,setSelectedSubject] = useState<SubjectDto>(initialSubjectDto)
     const {appointments} = props
     const role = localStorage.getItem("role")
     const { enqueueSnackbar } = useSnackbar();
@@ -80,6 +84,11 @@ export const MyCalendar: React.FC<Props> = (props) => {
                             setIsOpenBookVisitModal(true)
                         }
                     }
+                    if(role === Roles.TEACHER){
+                        setSelectedAppointmentId(event.appointmentId)
+                        setSelectedSubject(event.subject)
+                        setIsOpenDeleteAppointmentModal(true)
+                    }
                     if(role === ""){
                         enqueueSnackbar("Rezerwacja terminu wymaga zalogowania, zaloguj się lub stwórz konto.", { variant: 'warning' });
                     }
@@ -90,6 +99,7 @@ export const MyCalendar: React.FC<Props> = (props) => {
             />
             <BookVisitModal open={isOpenBookVisitModal} setOpen={setIsOpenBookVisitModal}
                             appointmentId={selectedAppointmentId}/>
+            <DeleteAppointmentModal open={isOpenDeleteAppointmentModal} setOpen={setIsOpenDeleteAppointmentModal}/>
         </>
     );
 };
