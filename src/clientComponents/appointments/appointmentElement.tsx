@@ -1,6 +1,8 @@
 import {AppointmentDto} from "../../dtos/models/AppointmentDto";
-import {Avatar, Grid, Paper, Typography} from "@mui/material";
+import {Avatar, Button, Grid, Paper, Typography} from "@mui/material";
 import * as React from "react";
+import {useState} from "react";
+import {CancelBookingModal} from "./CancelBookingModal";
 
 export interface AppointmentElementProps {
     appointment: AppointmentDto
@@ -8,6 +10,7 @@ export interface AppointmentElementProps {
 
 export const AppointmentElement: React.FC<AppointmentElementProps> = (props) => {
     const {appointment} = props
+    const [isOpenCancelBookingModal,setIsOpenCancelBookingModal] = useState<boolean>(false)
     return (
         <Paper style={{margin: "auto", width: "90%", padding: "5px", backgroundColor: "#ECF8FF",marginBottom:"2%"}}>
             <Grid item container direction={"row"}>
@@ -37,8 +40,13 @@ export const AppointmentElement: React.FC<AppointmentElementProps> = (props) => 
                     <Typography>
                         {appointment.subject.subjectName}
                     </Typography>
+                    <Button variant={"contained"} color={"error"} onClick={()=>setIsOpenCancelBookingModal(true)}>
+                        Anuluj wizytę
+                    </Button>
                 </Grid>
+                <CancelBookingModal open={isOpenCancelBookingModal} setOpen={setIsOpenCancelBookingModal} appointmentId={appointment.id}/>
             </Grid>
+
         </Paper>
     )
 }
