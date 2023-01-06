@@ -4,6 +4,7 @@ import {OpinionsTable} from "./OpinionsTable";
 import {useParams} from "react-router-dom";
 import {TeachersTable} from "./TeachersTable";
 import {ClientsTable} from "./ClientsTable";
+import {AppointmentsTable} from "./AppointmentsTable";
 
 export const AdminPanel = () =>{
     const params = useParams();
@@ -27,6 +28,11 @@ export const AdminPanel = () =>{
                 {tab === "clients" &&
                 <Grid item>
                     <ClientsTable/>
+                </Grid>
+                }
+                {tab === "appointments" &&
+                <Grid item>
+                    <AppointmentsTable/>
                 </Grid>
                 }
             </Grid>

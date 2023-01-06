@@ -1,6 +1,14 @@
 import axios from "axios";
 import {Dayjs} from "dayjs";
 
+export const getAllAppointments = async () => {
+    try{
+        const response = await axios.get("http://localhost:8080/api/appointments")
+        return response.data
+    }catch (error){
+        console.log(error)
+    }
+}
 export const createAppointment = async (teacherId: string, date: Dayjs) => {
     try {
         axios.post(`http://localhost:8080/api/appointment`, {teacherId, date})
