@@ -11,7 +11,7 @@ export const OpinionList: React.FC<OpinionListProps> = (props) => {
     return (
         <Grid container direction={"row"}>
             {opinions.map(opinion => {
-                return <OpinionElement opinion={opinion}/>
+                return <OpinionElement key={opinion.id} opinion={opinion}/>
             })}
         </Grid>
     )

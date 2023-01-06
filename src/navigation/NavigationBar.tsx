@@ -39,8 +39,8 @@ export const NavigationBar = () => {
 
                         <Grid item xs={1}>
                         <MenuItem onClick={() => {
-                        dispatch(logout())
-                        window.location.reload()
+                        dispatch(logout()).then(()=>window.location.reload())
+
                     }}>
                         Wyloguj
                         </MenuItem>

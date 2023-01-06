@@ -43,3 +43,4 @@ export const cancelBooking = async (appointmentId:string, clientId:string)=>{
         console.log(error)
     }
 }
+

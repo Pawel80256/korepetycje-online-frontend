@@ -41,8 +41,8 @@ export const ParagraphInputModal: React.FC<ParagraphInputModalProps> = (props) =
                 title: values.header,
                 content: values.content
             }
-            addToProfileInfo(teacherId!, paragraph)
-            window.location.reload()
+            addToProfileInfo(teacherId!, paragraph).then(()=>window.location.reload())
+
         }
     });
 

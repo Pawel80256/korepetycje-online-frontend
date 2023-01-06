@@ -13,8 +13,8 @@ export const SubjectToEditList: React.FC<SubjectToEditListProps> = (props) => {
     const params = useParams();
     const {teacherId} = params
     const handleDelete = (subjectName: string) => {
-        deleteSubject(teacherId!, subjectName)
-        window.location.reload()
+        deleteSubject(teacherId!, subjectName).then(()=>window.location.reload())
+
     };
 
     return (

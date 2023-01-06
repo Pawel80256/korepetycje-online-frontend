@@ -80,8 +80,7 @@ export const BookVisitModal: React.FC<BookVisitModalProps> = (props) => {
                                 variant="contained"
                                 onClick={() => {
                                     console.log(appointmentId, clientId, subject)
-                                    bookAppointment(appointmentId, clientId!, subject)
-                                    window.location.reload()
+                                    bookAppointment(appointmentId, clientId!, subject).then(()=>window.location.reload())
                                 }}
                             >
                                 Umów spotkanie

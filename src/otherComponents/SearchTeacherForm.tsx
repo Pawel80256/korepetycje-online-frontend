@@ -31,7 +31,7 @@ export const SearchTeacherForm = () => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <Grid container xs={7}
+            <Grid container item xs={7}
                   sx={{margin: 'auto', marginTop: "2%"}}>
                 <Grid item xs={5}>
                     <TextField

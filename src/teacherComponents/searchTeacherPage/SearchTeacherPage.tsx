@@ -7,7 +7,7 @@ export const SearchTeacherPage = () => {
     const {searchedTeachers} = useAppSelector(state => state.teachers)
     return (
 
-        <Grid sx={{display: "flex", marginTop: "4%"}} direction="column">
+        <Grid container sx={{display: "flex", marginTop: "4%"}} direction="column">
             <h1 style={{margin: "auto"}}>Wyszukaj swojego nauczuciela!</h1>
             <SearchTeacherForm></SearchTeacherForm>
             <Divider style={{marginTop: "2%", marginBottom: "2%"}}/>

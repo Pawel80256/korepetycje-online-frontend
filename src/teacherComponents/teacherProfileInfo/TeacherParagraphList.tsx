@@ -42,7 +42,7 @@ export const TeacherParagraphList: React.FC<TeacherParagraphListProps> = (props)
 
                 </Grid>}
                 {paragraphs.map(p =>
-                    <>
+                    <Grid key = {p.id}>
                         {(role === Roles.TEACHER && loggedUserId === teacherId) &&
                         <Grid container sx={{margin: "auto"}}>
                             <KeyboardArrowDownIcon
@@ -50,29 +50,27 @@ export const TeacherParagraphList: React.FC<TeacherParagraphListProps> = (props)
                                 sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
                                 onClick={() => {
                                     changeParagraphOrder(teacherId!, p.id, false)
-                                    window.location.reload()
+
                                 }}
                             />
                             <DeleteIcon
                                 sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
                                 onClick={() => {
-                                    deleteParagraph(teacherId!, p.id)
-                                    window.location.reload()
+                                    deleteParagraph(teacherId!, p.id).then(()=>window.location.reload())
                                 }}
                             />
                             <KeyboardArrowUpIcon
                                 style={{margin: "auto"}}
                                 sx={{"&:hover": {cursor: "pointer", backgroundColor: "#C0E6FC"}}}
                                 onClick={() => {
-                                    changeParagraphOrder(teacherId!, p.id, true)
-                                    window.location.reload()
+                                    changeParagraphOrder(teacherId!, p.id, true).then(()=>window.location.reload())
                                 }}
                             />
                         </Grid>
                         }
                         <TeacherParagraphElement paragraph={p} isTeacher={role === Roles.TEACHER}/>
                         {(role === Roles.TEACHER && loggedUserId === teacherId) && <Divider style={{marginTop: "2%", marginBottom: "2%"}}/>}
-                    </>
+                    </Grid>
                 )}
             </Paper>
             <ParagraphInputModal open={isOpenAddParagraphModal} setOpen={setIsOpenAddParagraphModal}/>
